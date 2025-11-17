@@ -1,15 +1,15 @@
 import pytest
-from google.adk.tools import google_search
-from src.agent import root_agent
+from src.githubtools import get_repo_structure, read_file_content
+from src.agent import root_agent, SYSTEM_INSTRUCTION
 
 @pytest.fixture
 def expected_agent_config():
     return {
-        "name": "search_assistant",
-        "model": "gemini-2.5-flash",
-        "instruction": "You are a helpful assistant. Answer user questions using Google Search when needed.",
-        "description": "An assistant that can search the web.",
-        "tools": [google_search]
+        "name": "Repo_Navigator",
+        "model": "gemini-2.5-flash-lite",
+        "instruction": SYSTEM_INSTRUCTION,
+        "description": "An assistant that can navigate a repo and answer question about it.",
+        "tools": [get_repo_structure, read_file_content]
     }
 
 def test_agent_initialization(expected_agent_config):
