@@ -24,7 +24,16 @@ def safe_get_contents(repo, path, ref, max_retries=3):
     return {"error": f"Rate limited while fetching: {path}"}
 
 def get_repo_structure(owner:str, repo_name:str, branch:str="main", max_depth:int=3)->dict:
-    """Return directory structure of a GitHub repo."""
+    """Return directory structure of a GitHub repo.
+    Return the directory structure of a GitHub repository. 
+    
+    Args: owner: GitHub username or organization. 
+    repo_name: Repository name. 
+    branch: Branch name (default "main"). 
+    max_depth: Maximum recursion depth (default 3). 
+    
+    Returns: Dictionary representing directory and file structure.
+    """
     repo = client.get_repo(f"{owner}/{repo_name}")
 
     def walk(path, depth):
@@ -52,6 +61,14 @@ def get_repo_structure(owner:str, repo_name:str, branch:str="main", max_depth:in
     return walk("", 0)
 
 def read_file_content(owner:str, repo_name:str, file_path:str, branch:str="main"):
+    """reads file from github repo 
+    
+    Args: owner: GitHub username or organization. 
+    repo_name: Repository name. 
+    file_path: path of the file 
+    branch: Branch name (default "main"). 
+    
+    Returns: str representing file content."""
     repo = client.get_repo(f"{owner}/{repo_name}")
 
     for delay in [1, 2, 4]:
