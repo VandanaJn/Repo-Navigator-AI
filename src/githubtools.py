@@ -48,6 +48,8 @@ def get_repo_structure(owner:str, repo_name:str, branch:str="main", max_depth:in
 
         for item in contents:
             if item.type == "dir":
+                if item.name=="tests":
+                    continue
                 tree[item.name] = walk(item.path, depth + 1)
             else:
                 tree[item.name] = {

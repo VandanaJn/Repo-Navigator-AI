@@ -1,21 +1,19 @@
 from google.adk.agents import LlmAgent
-from google.adk.tools import google_search
-from src.githubtools import get_repo_structure, read_file_content
+from src.architecture_agent import architecture_summarizer_agent
 
-SYSTEM_INSTRUCTION = """You must NEVER guess the purpose of a repository.
-When asked about a repository's purpose, behavior, architecture, design,
-how it works, or what it does, you MUST autonomously:
-1. Call get_repo_structure to retrieve the file tree.
-2. Identify the most relevant files WITHOUT asking the user.
-3. Automatically call read_file_content on relevant files.
-4. Only after reading them, answer the question based on real code,
-   not filenames or assumptions.
-"""
+
+INSTRUCTION_ROOT = """You are a versatile repository analysis expert. When a user asks about the architecture 
+or structure of a codebase, use the 'Code_Architecture_Agent' tool to get a detailed answer. 
+For other general questions (like 'What is this repo for?'), 
+use your own reasoning capabilities or other tools as needed."""
+DESCRIPTION_ROOT = "A master agent capable of analyzing repositories and delegating architecture questions."
 
 root_agent = LlmAgent(
-    name="Repo_Navigator",
-    model="gemini-2.5-flash-lite", # Or your preferred Gemini model
-    instruction=SYSTEM_INSTRUCTION,
-    description="An assistant that can navigate a repo and answer question about it.",
-    tools=[get_repo_structure, read_file_content]
+    name="Repo_Analysis_Master",
+    model="gemini-2.5-flash-lite",
+    instruction=INSTRUCTION_ROOT,
+    description="A master agent capable of analyzing repositories and delegating architecture questions.",
+    sub_agents=[architecture_summarizer_agent]
 )
+
+
