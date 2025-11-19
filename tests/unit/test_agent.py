@@ -5,7 +5,7 @@ from src.architecture_agent import architecture_summarizer_agent
 @pytest.fixture
 def expected_agent_config():
     return {
-        "name": "Repo_Analysis_Master",
+        "name": "repo_analysis_master",
         "model": "gemini-2.5-flash-lite",
         "instruction": INSTRUCTION_ROOT,
         "description": DESCRIPTION_ROOT,

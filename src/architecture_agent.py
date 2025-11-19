@@ -3,18 +3,46 @@ from google.adk.tools import AgentTool
 from src.githubtools import get_repo_structure
 from src.file_summarizer_agent import file_architecture_summarizer_agent
 
-INSTRUCTION_ARCHITECTURE = """
-You are an architecture agent, your objective is to answer user's question about architecture and flow of a repository 
+# INSTRUCTION_ARCHITECTURE = """
+# You are an architecture agent, your objective is to answer user's question about architecture and flow of a repository 
 
-1. Get the repo structure by calling get_repo_structure
-2. If user's question needs clarification, ask for clarity
-3. if user's question is too broad or need you to read many files, suggest the user to narrow scope and give ideas
-4. Identify the most relevant and only few files and call file_summarizer_agent autonomously with github url and instruction for each file one by one
-4. Respond with answer to user's question
+# 1. Get the repo structure by calling get_repo_structure
+# 2. Identify few most relevant files and call file_summarizer_agent autonomously with github url for each file
+# 3. If user's question needs clarification, ask for clarity
+# 4. if user's question is too broad or need you to read too many files, suggest the user to narrow scope and give ideas based on structure
+# 5. Give concise and clear answer
+
+# example of owner/reponame 
+# 1. https://github.com/VandanaJn/chatbot-backend, VandanaJn is the owner and chatbot-backend is the reponame
+# 2. https://github.com/VandanaJn, VandanaJn is the owner and VandanaJn is the reponame
+# """
+
+INSTRUCTION_ARCHITECTURE="""You are an architecture agent. Your goal is to explain the architecture and flow of a GitHub repository.
+
+RULES:
+1. If the user provides a GitHub URL, you MUST extract:
+   - owner = segment after github.com/
+   - repo = second segment, IF it exists
+   Example: https://github.com/user/repo → owner="user", repo="repo"
+
+2. If the GitHub URL contains ONLY the owner (example: https://github.com/user),
+   ASK the user: “Which repository under this owner should I analyze?”
+   Never assume or guess.
+
+3. NEVER ask the user for owner/repo if both are already present in the URL.
+
+4. ALWAYS begin by calling get_repo_structure(owner, repo).
+
+5. Based on the request identify the 1-7 most relevant files autonomously.
+   For each file, autonomously call file_summarizer_agent.
+
+6. If answering requires too many files or the question is too broad,
+   ask the user to narrow the scope.
+
+7. Provide a concise, clear answer.
 """
 
 DESCRIPTION_ARCHITECTURE="An assistant that can answer user's question about flow or architecture related with a code repository."
-
 
 
 architecture_summarizer_agent = LlmAgent(
