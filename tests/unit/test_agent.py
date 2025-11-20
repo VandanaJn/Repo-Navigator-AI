@@ -1,6 +1,6 @@
 import pytest
-from src.agent import root_agent, INSTRUCTION_ROOT, DESCRIPTION_ROOT
-from src.architecture_agent import architecture_summarizer_agent
+from repo_navigator.agent import root_agent, INSTRUCTION_ROOT, DESCRIPTION_ROOT
+from repo_navigator.sub_agents.architecture_agent import architecture_summarizer_agent
 
 @pytest.fixture
 def expected_agent_config():

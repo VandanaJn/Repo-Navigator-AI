@@ -1,7 +1,7 @@
 from google.adk.agents import LlmAgent
 from google.adk.tools import AgentTool
-from src.githubtools import get_repo_structure
-from src.file_summarizer_agent import file_architecture_summarizer_agent
+from repo_navigator.tools.githubtools import get_repo_structure
+from repo_navigator.sub_agents.file_summarizer_agent import file_architecture_summarizer_agent
 
 # INSTRUCTION_ARCHITECTURE = """
 # You are an architecture agent, your objective is to answer user's question about architecture and flow of a repository 
@@ -31,13 +31,16 @@ RULES:
 
 3. NEVER ask the user for owner/repo if both are already present in the URL.
 
-4. ALWAYS begin by calling get_repo_structure(owner, repo).
+4. ALWAYS begin by calling get_repo_structure.
 
-5. Based on the request identify the 1-7 most relevant files autonomously.
-   For each file, autonomously call file_summarizer_agent.
+5. After retrieving the repo structure:
+   - If a high-level answer is sufficient, answer without summarizing files. 
+   - Otherwise, pick 1–7 relevant files and call the Code_Summarizer_for_architecture 
+     subagent on each (via github URL + filepath).
+
 
 6. If answering requires too many files or the question is too broad,
-   ask the user to narrow the scope.
+   ask the user to narrow the scope based on repo structure.
 
 7. Provide a concise, clear answer.
 """

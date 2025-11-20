@@ -1,4 +1,5 @@
-google-adk==1.18.0
+google-adk==1.19.0
+google-adk[eval]
 PyGithub==2.8.1
 pytest==9.0.1
 pytest-cov==7.0.0
