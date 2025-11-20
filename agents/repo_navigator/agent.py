@@ -1,5 +1,5 @@
 from google.adk.agents import LlmAgent
-from repo_navigator.sub_agents.architecture_agent import architecture_summarizer_agent
+from .sub_agents.architecture_agent import architecture_summarizer_agent
 from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner
 from google.adk.apps.app import App, EventsCompactionConfig

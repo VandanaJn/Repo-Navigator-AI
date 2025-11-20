@@ -1,7 +1,7 @@
 from google.adk.agents import LlmAgent
 from google.adk.tools import AgentTool
-from repo_navigator.tools.githubtools import get_repo_structure
-from repo_navigator.sub_agents.file_summarizer_agent import file_architecture_summarizer_agent
+from .tools.githubtools import get_repo_structure
+from .file_summarizer_agent import file_architecture_summarizer_agent
 
 # INSTRUCTION_ARCHITECTURE = """
 # You are an architecture agent, your objective is to answer user's question about architecture and flow of a repository 

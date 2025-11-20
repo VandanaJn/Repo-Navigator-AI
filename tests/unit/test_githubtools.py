@@ -3,7 +3,7 @@ import time
 from unittest.mock import MagicMock, patch
 from github import GithubException, RateLimitExceededException
 
-import repo_navigator.tools.githubtools   
+import repo_navigator.sub_agents.tools.githubtools   
 
 
 # ----------------------------
@@ -15,7 +15,7 @@ def test_safe_get_contents_success():
     fake_file = MagicMock()
     repo.get_contents.return_value = fake_file
 
-    result = repo_navigator.tools.githubtools.safe_get_contents(repo, "path/file.txt", "main")
+    result = repo_navigator.sub_agents.tools.githubtools.safe_get_contents(repo, "path/file.txt", "main")
 
     assert result == fake_file
     repo.get_contents.assert_called_once_with("path/file.txt", ref="main")
@@ -25,7 +25,7 @@ def test_safe_get_contents_404_returns_none():
     repo = MagicMock()
     repo.get_contents.side_effect = GithubException(status=404, data={})
 
-    result = repo_navigator.tools.githubtools.safe_get_contents(repo, "missing.txt", "main")
+    result = repo_navigator.sub_agents.tools.githubtools.safe_get_contents(repo, "missing.txt", "main")
 
     assert result is None
 
@@ -37,7 +37,7 @@ def test_safe_get_contents_rate_limit_retries_and_succeeds():
         MagicMock()  # success
     ]
 
-    result = repo_navigator.tools.githubtools.safe_get_contents(repo, "foo", "main")
+    result = repo_navigator.sub_agents.tools.githubtools.safe_get_contents(repo, "foo", "main")
     assert result is not None
     assert repo.get_contents.call_count == 2
 
@@ -46,7 +46,7 @@ def test_safe_get_contents_rate_limit_exhausted():
     repo = MagicMock()
     repo.get_contents.side_effect = RateLimitExceededException(403, "rate")
 
-    result = repo_navigator.tools.githubtools.safe_get_contents(repo, "foo", "main", max_retries=2)
+    result = repo_navigator.sub_agents.tools.githubtools.safe_get_contents(repo, "foo", "main", max_retries=2)
 
     assert isinstance(result, dict)
     assert "error" in result
@@ -57,7 +57,7 @@ def test_safe_get_contents_rate_limit_exhausted():
 # get_repo_structure()
 # ----------------------------
 
-@patch("repo_navigator.tools.githubtools.client")
+@patch("repo_navigator.sub_agents.tools.githubtools.client")
 def test_get_repo_structure_lists_files(mock_client):
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
@@ -84,7 +84,7 @@ def test_get_repo_structure_lists_files(mock_client):
         [sub_file],             # /sub
     ]
 
-    result = repo_navigator.tools.githubtools.get_repo_structure("me", "testrepo")
+    result = repo_navigator.sub_agents.tools.githubtools.get_repo_structure("me", "testrepo")
 
     assert "a.txt" in result
     assert "sub" in result
@@ -92,7 +92,7 @@ def test_get_repo_structure_lists_files(mock_client):
     assert "b.txt" in result["sub"]
 
 
-@patch("repo_navigator.tools.githubtools.client")
+@patch("repo_navigator.sub_agents.tools.githubtools.client")
 def test_get_repo_structure_truncated(mock_client):
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
@@ -114,7 +114,7 @@ def test_get_repo_structure_truncated(mock_client):
         [],             # level1/level2
     ]
 
-    result = repo_navigator.tools.githubtools.get_repo_structure("me", "repo", max_depth=1)
+    result = repo_navigator.sub_agents.tools.githubtools.get_repo_structure("me", "repo", max_depth=1)
 
     # Since max_depth=1, level1 contents should be truncated
     assert result["level1"] ==  {
@@ -130,7 +130,7 @@ def test_get_repo_structure_truncated(mock_client):
 # read_file_content()
 # ----------------------------
 
-@patch("repo_navigator.tools.githubtools.client")
+@patch("repo_navigator.sub_agents.tools.githubtools.client")
 def test_read_file_content_success(mock_client):
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
@@ -140,23 +140,23 @@ def test_read_file_content_success(mock_client):
 
     repo.get_contents.return_value = mock_file
 
-    result = repo_navigator.tools.githubtools.read_file_content("me", "repo", "README.md")
+    result = repo_navigator.sub_agents.tools.githubtools.read_file_content("me", "repo", "README.md")
 
     assert result == "hello world"
 
 
-@patch("repo_navigator.tools.githubtools.client")
+@patch("repo_navigator.sub_agents.tools.githubtools.client")
 def test_read_file_content_404(mock_client):
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
 
     repo.get_contents.side_effect = GithubException(404, {})
 
-    result = repo_navigator.tools.githubtools.read_file_content("me", "repo", "missing.md")
+    result = repo_navigator.sub_agents.tools.githubtools.read_file_content("me", "repo", "missing.md")
     assert result is None
 
 
-@patch("repo_navigator.tools.githubtools.client")
+@patch("repo_navigator.sub_agents.tools.githubtools.client")
 def test_read_file_content_rate_limit_retry(mock_client):
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
@@ -169,5 +169,5 @@ def test_read_file_content_rate_limit_retry(mock_client):
         mock_file,
     ]
 
-    result = repo_navigator.tools.githubtools.read_file_content("me", "repo", "file.txt")
+    result = repo_navigator.sub_agents.tools.githubtools.read_file_content("me", "repo", "file.txt")
     assert result == "ok"
