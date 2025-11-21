@@ -4,18 +4,20 @@
 
 VENV := .venv
 
-# Detect OS
+# Detect OS and set VENV_PYTHON
 ifeq ($(OS),Windows_NT)
-    PYTHON := $(VENV)/Scripts/python.exe
+    VENV_PYTHON := $(VENV)/Scripts/python.exe
 else
-    PYTHON := $(VENV)/bin/python
+    VENV_PYTHON := $(VENV)/bin/python
 endif
 
-# Detect CI
+# Detect CI & choose the PYTHON executable
 ifeq ($(CI),true)
     USE_VENV := false
+    PYTHON := python
 else
     USE_VENV := true
+    PYTHON := $(VENV_PYTHON)
 endif
 
 .PHONY: install run web test ingest clean
