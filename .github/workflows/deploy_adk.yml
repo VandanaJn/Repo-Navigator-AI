@@ -6,7 +6,6 @@ on:
       - main # Trigger on pushes to the main branch
 
 env:
-  PROJECT_ID: gen-lang-client-0651958054 # Your GCP project ID
   REGION: us-central1 # Your desired GCP region (e.g., us-central1)
   AGENT_NAME: sample_agent # Replace with the name of your ADK agent (e.g., 'repo_navigator_agent')
   ADK_AGENT_CONFIG_FILE: sample_agent/.agent_engine_config.json # Path to your ADK config file
