@@ -1,0 +1,30 @@
+name: Python CI
+
+on:
+  push:
+    branches: [main, work]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install make
+        run: sudo apt-get install -y make
+
+      - name: Run Makefile install
+        run: make install
+
+      - name: Run Makefile tests
+        run: make test
