@@ -42,7 +42,7 @@ jobs:
 
     - name: Deploy ADK Agent to Vertex AI
       run: |
-        !adk deploy agent_engine \
+        adk deploy agent_engine \
           --project=${{ secrets.PROJECT_ID }} \
           --region=${{ env.REGION }} \
           ${{ env.AGENT_NAME }} \
