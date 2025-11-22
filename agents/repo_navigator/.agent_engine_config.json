@@ -1,26 +1,15 @@
 {
-  "agent_engine_name": "repo-navigator-ai-agent",
-  "display_name": "Repo Navigator AI Agent",
-  "description": "A conversational AI agent that navigates GitHub repositories to answer questions about architecture, deployment, etc.",
-  "entry_point": "agent:runner",
-  "runtime_config": {
+  "engine": {
+    "entry_point": "agent:runner"
+  },
+  "runtime": {
     "python_version": "3.11",
     "requirements_file": "requirements.txt"
   },
-  "serving_config": {
-    "machine_type": "e2-standard-4",
-    "min_replica_count": 1,
-    "max_replica_count": 3,
-    "traffic_split": {
-      "default": 100
-    },
-    "environment_variables": {
-      "GCP_PROJECT_ID": "${PROJECT_ID}",
-      "GCP_REGION": "us-west1",
-      "GITHUB_TOKEN": "${GITHUBTOKEN}"
-    }
+  "resources": {
+    "machine_type": "e2-standard-4"
   },
-  "code_config": {
-    "source_directory": "agents/repo_navigator"
+  "code": {
+    "source": "repo_navigator"
   }
 }
