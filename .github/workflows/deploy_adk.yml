@@ -44,10 +44,9 @@ jobs:
     - name: Deploy ADK Agent to Vertex AI
       run: |
         cd agents
-        adk deploy agent_engine \
-          --project=${{ secrets.PROJECT_ID }} \
-          --region=${{ env.REGION }} \
-          --agent_engine_config_file=${{ env.ADK_AGENT_CONFIG_FILE }} 
-          ${{ env.AGENT_NAME }}  
+        adk deploy agent_engine "${{ env.AGENT_NAME }}" \
+          --project="${{ secrets.PROJECT_ID }}" \
+          --region="${{ env.REGION }}" \
+          --agent_engine_config_file="${{ env.ADK_AGENT_CONFIG_FILE }}"
       shell: bash
 
