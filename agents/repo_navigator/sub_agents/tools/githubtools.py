@@ -2,7 +2,7 @@ import os
 import time
 from github import Github, GithubException, RateLimitExceededException
 
-GITHUB_TOKEN = os.getenv("GITHUBTOKEN")
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 client = Github(GITHUB_TOKEN)
 
 def safe_get_contents(repo, path, ref, max_retries=3):
