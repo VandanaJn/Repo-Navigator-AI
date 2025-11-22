@@ -7,7 +7,7 @@ on:
       - main 
 
 env:
-  REGION: us-west2 # Your desired GCP region (e.g., us-central1)
+  REGION: us-west1 # Your desired GCP region (e.g., us-central1)
   AGENT_NAME: agents/repo_navigator # Replace with the name of your ADK agent (e.g., 'repo_navigator_agent')
   ADK_AGENT_CONFIG_FILE: agents/repo_navigator/.agent_engine_config.json # Path to your ADK config file
 
@@ -43,9 +43,11 @@ jobs:
 
     - name: Deploy ADK Agent to Vertex AI
       run: |
+        cd agents/repo_navigator # Navigate to the agent's directory
         adk deploy agent_engine \
           --project=${{ secrets.PROJECT_ID }} \
           --region=${{ env.REGION }} \
-          ${{ env.AGENT_NAME }} \
-          --agent_engine_config_file=${{ env.ADK_AGENT_CONFIG_FILE }}
-      shell: bash # Ensure bash is used for `!` command
+          . \ # Use '.' to refer to the current directory (the agent)
+          --agent_engine_config_file=.agent_engine_config.json # Path relative to current directory
+      shell: bash
+

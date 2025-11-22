@@ -16,7 +16,7 @@
     },
     "environment_variables": {
       "GCP_PROJECT_ID": "${PROJECT_ID}",
-      "GCP_REGION": "us-west2",
+      "GCP_REGION": "us-west1",
       "GITHUB_TOKEN": "${GITHUBTOKEN}"
     }
   },
