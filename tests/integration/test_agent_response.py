@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 os.environ["ADK_EVALUATION_TIMEOUT_SECONDS"] = "180"
 # Load environment variables from .env file
-load_dotenv()
+
 from google.adk.evaluation.agent_evaluator import AgentEvaluator
 
 import pytest
