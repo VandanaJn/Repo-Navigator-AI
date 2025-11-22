@@ -7,8 +7,8 @@ on:
 
 env:
   REGION: us-west2 # Your desired GCP region (e.g., us-central1)
-  AGENT_NAME: sample_agent # Replace with the name of your ADK agent (e.g., 'repo_navigator_agent')
-  ADK_AGENT_CONFIG_FILE: sample_agent/.agent_engine_config.json # Path to your ADK config file
+  AGENT_NAME: repo_navigator_agent # Replace with the name of your ADK agent (e.g., 'repo_navigator_agent')
+  ADK_AGENT_CONFIG_FILE: agents/repo_navigator/.agent_engine_config.json # Path to your ADK config file
 
 jobs:
   deploy:
