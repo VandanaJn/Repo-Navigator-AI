@@ -1,15 +1,5 @@
 {
-  "engine": {
-    "entry_point": "agent:runner"
-  },
-  "runtime": {
-    "python_version": "3.11",
-    "requirements_file": "requirements.txt"
-  },
-  "resources": {
-    "machine_type": "e2-standard-4"
-  },
-  "code": {
-    "source": "repo_navigator"
-  }
+    "min_instances": 0,
+    "max_instances": 1,
+    "resource_limits": {"cpu": "1", "memory": "1Gi"}
 }
