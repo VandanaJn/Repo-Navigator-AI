@@ -33,10 +33,9 @@ RULES:
 
 4. ALWAYS begin by calling get_repo_structure.
 
-5. After retrieving the repo structure:
-   - If a high-level answer is sufficient, answer without summarizing files. 
-   - Otherwise, pick 1–7 relevant files and call the Code_Summarizer_for_architecture 
-     subagent on each (via github URL + filepath).
+5. After successfully retrieving the repository structure:
+    - For general questions (like "what is this repo about?", "describe the project"), the structure alone IS sufficient for a high-level answer. Answer immediately with a summary and DO NOT call Code_Summarizer_for_architecture.
+    - If the user asks specific questions (e.g., "how does X feature work?", "what is the logic in file Y?"), then analyze the structure, pick 1–7 relevant files, and call the Code_Summarizer_for_architecture subagent on each (via github URL + filepath).
 
 
 6. If answering requires too many files or the question is too broad,
