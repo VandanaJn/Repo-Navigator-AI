@@ -47,7 +47,7 @@ jobs:
         adk deploy agent_engine \
           --project=${{ secrets.PROJECT_ID }} \
           --region=${{ env.REGION }} \
-          . \ # Use '.' to refer to the current directory 
+          . \ 
           --agent_engine_config_file=.agent_engine_config.json # Path relative to current directory
       shell: bash
 
