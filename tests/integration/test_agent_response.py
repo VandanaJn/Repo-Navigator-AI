@@ -13,6 +13,7 @@ async def test_with_single_test_file():
     
     await AgentEvaluator.evaluate(
         agent_module="repo_navigator",
-        eval_dataset_file_path_or_dir="tests/integration/integration_evalset.json",print_detailed_results=True,
+        eval_dataset_file_path_or_dir="tests/integration/integration_evalset.json",
+        print_detailed_results=True,
         
     )
