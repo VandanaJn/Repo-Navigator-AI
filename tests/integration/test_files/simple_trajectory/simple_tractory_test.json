@@ -1,0 +1,152 @@
+{
+  "eval_set_id": "converted_eval_set",
+  "name": "Converted Evaluation Set",
+  "creation_timestamp": 1678886400.0,
+  "eval_cases": [
+    {
+      "eval_id": "warmup_00",
+      "conversation": [
+        {
+          "invocation_id": "unique-invocation-id-warmup-00",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Hello"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Hello! How can I help today?"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886401.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886401.0
+    },
+    {
+      "eval_id": "case_1",
+      "conversation": [
+        {
+          "invocation_id": "unique-invocation-id-warmup-00",
+          "user_content": {
+            "parts": [
+              {
+                "text": "How is the weather?"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "I am sorry, I cannot help you with this question. My capabilities are limited to analyzing code repositories."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886401.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886401.0
+    },
+    {
+      "eval_id": "case_2",
+      "conversation": [
+        {
+          "invocation_id": "unique-invocation-id-case-1",
+          "user_content": {
+            "parts": [
+              {
+                "text": "What is https://github.com/VandanaJn/chatbot-backend about?"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "This repository is a backend for a chatbot application. It includes files related to: * Core Application Logic: app/main.py and app/__init__.py contain the main functionalities. * Data Indexing and Management: app/index_pdf.py suggests functionality for indexing PDF documents, and app/milvus_client.py uses Milvus, a vector database. * Configuration: .gitignore, LICENSE, and requirements.txt list dependencies."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "transfer_to_agent",
+                "args": {
+                  "agent_name": "Code_Architecture_Agent"
+                }
+              },
+              {
+                "name": "get_repo_structure",
+                "args": {
+                  "owner": "VandanaJn",
+                  "repo_name": "chatbot-backend"
+                }
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886402.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886402.0
+    },
+    {
+      "eval_id": "case_3",
+      "conversation": [
+        {
+          "invocation_id": "unique-invocation-id-case-2",
+          "user_content": {
+            "parts": [
+              {
+                "text": "What is https://github.com/VandanaJn about?"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Which repository under this owner should I analyze?"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "transfer_to_agent",
+                "args": {
+                  "agent_name": "Code_Architecture_Agent"
+                }
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886403.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886403.0
+    }
+  ]
+}
