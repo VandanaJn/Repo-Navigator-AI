@@ -98,7 +98,8 @@
                 "name": "get_repo_structure",
                 "args": {
                   "owner": "VandanaJn",
-                  "repo_name": "chatbot-backend"
+                  "repo_name": "chatbot-backend",
+                  "max_depth":2
                 }
               }
             ],

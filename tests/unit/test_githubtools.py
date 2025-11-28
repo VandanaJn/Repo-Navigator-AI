@@ -114,7 +114,7 @@ def test_get_repo_structure_truncated(mock_client):
         [],             # level1/level2
     ]
 
-    result = repo_navigator.sub_agents.tools.githubtools.get_repo_structure("me", "repo", max_depth=1)
+    result = repo_navigator.sub_agents.tools.githubtools.get_repo_structure("me", "repo", max_depth=2)
 
     # Since max_depth=1, level1 contents should be truncated
     assert result["level1"] ==  {

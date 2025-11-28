@@ -36,7 +36,8 @@
                 "name": "get_repo_structure",
                 "args": {
                   "owner": "VandanaJn",
-                  "repo_name": "yt-channel-crawler"
+                  "repo_name": "yt-channel-crawler",
+                  "max_depth":2
                 }
               }
             ],
@@ -49,7 +50,7 @@
           "user_content": {
             "parts": [
               {
-                "text": "what's the flow in batch_transcribe"
+                "text": "what's the flow in batch_transcribe_v2 pipeline"
               }
             ],
             "role": "user"
