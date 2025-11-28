@@ -1,6 +1,6 @@
 import pytest
 from repo_navigator.sub_agents.file_summarizer_agent import file_architecture_summarizer_agent, INSTRUCTION_FILE_SUMMARIZER, DESCRIPTION_FILE_SUMMARIZER
-from repo_navigator.sub_agents.tools.githubtools import read_file_content
+from repo_navigator.sub_agents.tools.mcp_tools import mcp_tools_get_content
 
 @pytest.fixture
 def expected_agent_config():
@@ -9,7 +9,7 @@ def expected_agent_config():
         "model": "gemini-2.5-flash-lite",
         "instruction": INSTRUCTION_FILE_SUMMARIZER,
         "description": DESCRIPTION_FILE_SUMMARIZER,
-        "tools": [read_file_content],
+        "tools": [mcp_tools_get_content],
         "sub_agents": []
     }
 

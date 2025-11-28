@@ -1,5 +1,5 @@
 from google.adk.agents import LlmAgent
-from .tools.githubtools import read_file_content
+from .tools.mcp_tools import mcp_tools_get_content
 
 
 INSTRUCTION_FILE_SUMMARIZER = """
@@ -20,13 +20,20 @@ to understand the flow and architecture of the system.
 6. for other files summarize it to keep flow and architecture info clear and concise
 7. Do not look for performance, errors, security or any other issue in the code
 8. Do not suggest architecture advice, this is part of a larger agentic framework
+--- 💡 CRITICAL OUTPUT MANDATE 💡 ---
+9. **INTERMEDIATE OUTPUT (STRICT):** You **MUST** output only the summarized content, formatted clearly for the calling agent. **DO NOT** use conversational language, greetings, or commentary intended for the end-user. Your output should be a clean, structured summary that the parent agent can easily concatenate and synthesize into a final user-facing response.
+
+    **STRICT FORMAT:**
+    "File: <file_path>
+    ---
+    <concise summary of architecture, imports, and method signatures for this file>
 """
 
-DESCRIPTION_FILE_SUMMARIZER = "An assistant that can read a file and summarize it to be useful for understanding architecture."
+DESCRIPTION_FILE_SUMMARIZER = "An assistant that can read a single file specified in the absolute github url and summarize it to be useful for understanding architecture."
 file_architecture_summarizer_agent = LlmAgent(
     name="Code_Summarizer_for_architecture",
     model="gemini-2.5-flash-lite", 
     instruction=INSTRUCTION_FILE_SUMMARIZER,
     description=DESCRIPTION_FILE_SUMMARIZER,
-    tools=[read_file_content]
+    tools=[mcp_tools_get_content]
 )

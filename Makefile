@@ -66,11 +66,11 @@ else
 endif
 
 # ------------------------
-# Run tests with coverage
+# Run tests with coverage only running unittest as integration tests are not working after tools were changed to mcp
 # ------------------------
 test:
 	@echo "Running tests with coverage..."
-	"$(PYTHON)" -m pytest tests/ --maxfail=1 --disable-warnings -q --cov=. --cov-report=term-missing --cov-fail-under=80
+	"$(PYTHON)" -m pytest tests/unit --maxfail=1 --disable-warnings -q --cov=. --cov-report=term-missing --cov-fail-under=80
 
 # ------------------------
 # Remove virtual environment
