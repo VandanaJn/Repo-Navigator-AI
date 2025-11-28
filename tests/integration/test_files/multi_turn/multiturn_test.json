@@ -11,7 +11,7 @@
           "user_content": {
             "parts": [
               {
-                "text": "whats the architecture of https://github.com/VandanaJn/yt-channel-crawler"
+                "text": "what's https://github.com/VandanaJn/yt-channel-crawler about"
               }
             ],
             "role": "user"
@@ -66,9 +66,9 @@
           "intermediate_data": {
             "tool_uses": [
               {
-                "name": "transfer_to_agent",
+                "name": "Code_Summarizer_for_architecture",
                 "args": {
-                  "agent_name": "Code_Summarizer_for_architecture"
+                  "request": "Explain the transcribe flow in https://github.com/VandanaJn/yt-channel-crawler/blob/main/batch_transcribe_v2.py"
                 }
               },
               {
