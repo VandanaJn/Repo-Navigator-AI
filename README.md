@@ -1,2 +1,88 @@
 # Repo-Navigator-AI
-Repo Navigator AI
+
+A master agent for analyzing GitHub repositories and answering architecture questions using LLMs and tool-augmented agents.
+
+## Features
+- Analyzes public GitHub repositories and summarizes their structure and code flow.
+- Delegates architecture questions to specialized sub-agents.
+- Uses tool calls to extract owner/repo from URLs and fetch repo/file content.
+- Integration tests with deterministic GitHub responses for CI stability.
+- Configurable evaluation metrics for response and tool usage matching.
+
+## Quick Start
+
+### 1. Install dependencies
+```powershell
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 2. Set up environment variables
+Create a `.env` file with your API keys:
+```
+GOOGLE_API_KEY=your_google_key
+GEMINI_API_KEY=your_gemini_key
+GITHUB_TOKEN=your_github_token
+```
+
+#### How to get a GitHub Token
+1. Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens).
+2. Click **Generate new token** (classic or fine-grained).
+3. Select scopes: at minimum, choose `repo` (for public repos) and `read:user`.
+4. Copy the generated token and paste it as `GITHUB_TOKEN` in your `.env` file.
+5. Keep your token secret and never commit `.env` to source control.
+
+#### How to get a Google API Key
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2. Create or select a project.
+3. Navigate to **APIs & Services > Credentials**.
+4. Click **Create credentials** > **API key**.
+5. Copy the generated key and paste it as `GOOGLE_API_KEY` in your `.env` file.
+6. Enable the required APIs (e.g., Gemini, Vertex AI, or other relevant services).
+7. Keep your API key secret and never commit `.env` to source control.
+
+> **Note:** `GOOGLE_API_KEY` and `GEMINI_API_KEY` can use the same value if your Gemini access is enabled in your Google Cloud project. Set both variables to the same API key in your `.env` file.
+
+### 3. Run tests
+```powershell
+.venv\Scripts\python.exe -m pytest -q -o log_cli=true -o log_cli_level=INFO
+```
+
+## Testing & CI
+- Integration tests use a `FakeGithub` client (see `tests/integration/conftest.py`) for deterministic repo/file responses.
+- LLM calls are live by default; you can mock/stub for full determinism.
+- Evaluation thresholds are set in `tests/integration/test_files/*/test_config.json`.
+- Retry logic for flaky network/timeout errors is in `tests/integration/retry.py`.
+
+## Project Structure
+```
+Repo-Navigator-AI/
+├── agents/
+│   └── repo_navigator/
+│       ├── agent.py
+│       └── sub_agents/
+│           ├── architecture_agent.py
+│           └── tools/
+│               └── githubtools.py
+├── tests/
+│   ├── integration/
+│   │   ├── conftest.py
+│   │   ├── retry.py
+│   │   └── test_files/
+│   └── unit/
+├── requirements.txt
+├── .env
+└── README.md
+```
+
+## Customization
+- To change evaluation thresholds, edit the relevant `test_config.json` files.
+- To mock LLM responses, add stubs in `conftest.py` or use a test agent.
+- To add new tools or sub-agents, extend `agent.py` and `sub_agents/`.
+
+## License
+See `LICENSE` for details.
+
+## Maintainer
+VandanaJn
