@@ -3,8 +3,18 @@ import time
 from github import Github, GithubException, RateLimitExceededException
 from github.ContentFile import ContentFile
 
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-client = Github(GITHUB_TOKEN)
+
+def _get_github_client():
+    """Lazily create and return a Github client.
+
+    Returns None when no token is available. Tests can patch this function
+    to return a mock client instead.
+    """
+    token = os.getenv("GITHUB_TOKEN")
+    if not token:
+        return None
+
+    return Github(token)
 
 import re
 from urllib.parse import urlparse
@@ -122,6 +132,10 @@ def get_repo_structure(
                 - { "error": "..." } when module validation fails
     """
 
+    client = _get_github_client()
+    if client is None:
+        return {"error": "GitHub client not available in test mode or missing token"}
+
     repo = client.get_repo(f"{owner}/{repo_name}")
     start_path = module.strip("/") if module else ""
 
@@ -191,6 +205,10 @@ def read_file_content(owner:str, repo_name:str, file_path:str, branch:str="main"
     branch: Branch name (default "main"). 
     
     Returns: str representing file content."""
+    client = _get_github_client()
+    if client is None:
+        return None
+
     repo = client.get_repo(f"{owner}/{repo_name}")
 
     for delay in [1, 2, 4]:

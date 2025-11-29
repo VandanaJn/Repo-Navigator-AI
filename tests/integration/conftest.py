@@ -67,7 +67,7 @@ class FakeGithub:
 
 @pytest.fixture(autouse=True)
 def patch_github_client(monkeypatch):
-    # Patch the client used by the githubtools module to our fake client.
+    # Patch _get_github_client() to return our fake client for integration tests.
     try:
         import repo_navigator.sub_agents.tools.githubtools as gt
 
@@ -76,7 +76,8 @@ def patch_github_client(monkeypatch):
         monkeypatch.setattr(gt, "ContentFile", FakeContent, raising=False)
 
         fake = FakeGithub()
-        monkeypatch.setattr(gt, "client", fake)
+        # Patch _get_github_client to return the fake client instead of None or real client
+        monkeypatch.setattr(gt, "_get_github_client", lambda: fake)
     except Exception:
         # If import fails for some reason, tests will continue without patching;
         # this keeps the fixture safe during partial test runs.

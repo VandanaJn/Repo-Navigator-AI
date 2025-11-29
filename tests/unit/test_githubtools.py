@@ -57,8 +57,10 @@ def test_safe_get_contents_rate_limit_exhausted():
 # get_repo_structure()
 # ----------------------------
 
-@patch("repo_navigator.sub_agents.tools.githubtools.client")
-def test_get_repo_structure_lists_files(mock_client):
+@patch("repo_navigator.sub_agents.tools.githubtools._get_github_client")
+def test_get_repo_structure_lists_files(mock_get_client):
+    mock_client = MagicMock()
+    mock_get_client.return_value = mock_client
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
 
@@ -92,8 +94,10 @@ def test_get_repo_structure_lists_files(mock_client):
     assert "b.txt" in result["sub"]
 
 
-@patch("repo_navigator.sub_agents.tools.githubtools.client")
-def test_get_repo_structure_truncated(mock_client):
+@patch("repo_navigator.sub_agents.tools.githubtools._get_github_client")
+def test_get_repo_structure_truncated(mock_get_client):
+    mock_client = MagicMock()
+    mock_get_client.return_value = mock_client
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
 
@@ -130,8 +134,10 @@ def test_get_repo_structure_truncated(mock_client):
 # read_file_content()
 # ----------------------------
 
-@patch("repo_navigator.sub_agents.tools.githubtools.client")
-def test_read_file_content_success(mock_client):
+@patch("repo_navigator.sub_agents.tools.githubtools._get_github_client")
+def test_read_file_content_success(mock_get_client):
+    mock_client = MagicMock()
+    mock_get_client.return_value = mock_client
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
 
@@ -145,8 +151,10 @@ def test_read_file_content_success(mock_client):
     assert result == "hello world"
 
 
-@patch("repo_navigator.sub_agents.tools.githubtools.client")
-def test_read_file_content_404(mock_client):
+@patch("repo_navigator.sub_agents.tools.githubtools._get_github_client")
+def test_read_file_content_404(mock_get_client):
+    mock_client = MagicMock()
+    mock_get_client.return_value = mock_client
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
 
@@ -156,8 +164,10 @@ def test_read_file_content_404(mock_client):
     assert result is None
 
 
-@patch("repo_navigator.sub_agents.tools.githubtools.client")
-def test_read_file_content_rate_limit_retry(mock_client):
+@patch("repo_navigator.sub_agents.tools.githubtools._get_github_client")
+def test_read_file_content_rate_limit_retry(mock_get_client):
+    mock_client = MagicMock()
+    mock_get_client.return_value = mock_client
     repo = MagicMock()
     mock_client.get_repo.return_value = repo
 
