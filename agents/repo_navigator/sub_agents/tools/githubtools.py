@@ -6,6 +6,71 @@ from github.ContentFile import ContentFile
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 client = Github(GITHUB_TOKEN)
 
+import re
+from urllib.parse import urlparse
+
+def extract_owner_and_repo(github_url: str) -> dict:
+    """
+    Parses a GitHub URL (or path) to reliably extract the owner and repository name.
+
+    The function handles various formats, including full URLs, short paths, and URLs
+    pointing to specific files or branches (e.g., 'blob', 'tree'). It ensures that
+    the extracted owner and repo are the first two meaningful path segments.
+
+    Args:
+        github_url: The input string, which should be a GitHub URL or path.
+                    e.g., "https://github.com/VandanaJn/yt-channel-crawler/blob/main/file.py"
+
+    Returns:
+        A dictionary with keys 'owner' and 'repo'.
+        - If both are found: {'owner': 'owner_name', 'repo': 'repo_name'}
+        - If only the owner is found (e.g., 'https://github.com/owner'):
+          {'owner': 'owner_name', 'repo': None}
+        - If parsing fails completely:
+          {'owner': None, 'repo': None}
+    """
+    if not github_url:
+        return {'owner': None, 'repo': None}
+
+    try:
+        # 1. Parse the URL to get the path component
+        parsed_url = urlparse(github_url)
+        path = parsed_url.path.strip('/')
+
+        # Handle short forms (e.g., "owner/repo" without the domain)
+        if not path and parsed_url.netloc:
+            # If netloc is "github.com/owner/repo" (malformed URL), path will be empty, 
+            # so we use netloc and remove the domain.
+            path = parsed_url.netloc.replace('github.com', '').strip('/')
+        
+        # 2. Split the path into segments and filter out empty strings
+        segments = [segment for segment in path.split('/') if segment]
+
+        # 3. Handle domain in segments (e.g., if user pastes 'github.com/owner/repo')
+        if segments and segments[0].lower() == 'github.com':
+            segments = segments[1:]
+
+        owner = None
+        repo = None
+
+        if len(segments) >= 1:
+            owner = segments[0]
+        
+        if len(segments) >= 2:
+            repo = segments[1]
+            
+            # Additional check to ensure the second segment isn't a known GitHub keyword 
+            # that might indicate an owner-only URL (e.g., 'https://github.com/owner/issues')
+            # This is a defensive check, though the segment split should handle it.
+            if repo and re.match(r'^(issues|pulls|wiki|settings|marketplace|orgs)$', repo, re.IGNORECASE):
+                repo = None # Treat this as an owner-only URL if the 'repo' name is a keyword
+
+        return {'owner': owner, 'repo': repo}
+
+    except Exception:
+        # Catch any unexpected parsing errors
+        return {'owner': None, 'repo': None}
+
 def safe_get_contents(repo, path, ref, max_retries=3):
     """GitHub get_contents() with short retries — LLM-safe."""
     delay = 1

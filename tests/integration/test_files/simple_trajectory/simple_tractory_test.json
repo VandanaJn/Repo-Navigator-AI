@@ -7,22 +7,18 @@
       "eval_id": "warmup_00",
       "conversation": [
         {
-          "invocation_id": "unique-invocation-id-warmup-00",
+          "invocation_id": "invocation-warmup-00",
           "user_content": {
+            "role": "user",
             "parts": [
-              {
-                "text": "Hello"
-              }
-            ],
-            "role": "user"
+              { "text": "Hello" }
+            ]
           },
           "final_response": {
+            "role": "model",
             "parts": [
-              {
-                "text": "Hello! How can I help today?"
-              }
-            ],
-            "role": "model"
+              { "text": "I can help you navigate github repositories, which github repository would you like to explore?" }
+            ]
           },
           "intermediate_data": {
             "tool_uses": [],
@@ -34,26 +30,23 @@
       "session_input": null,
       "creation_timestamp": 1678886401.0
     },
+
     {
       "eval_id": "case_1",
       "conversation": [
         {
-          "invocation_id": "unique-invocation-id-warmup-00",
+          "invocation_id": "invocation-case-1",
           "user_content": {
+            "role": "user",
             "parts": [
-              {
-                "text": "How is the weather?"
-              }
-            ],
-            "role": "user"
+              { "text": "How is the weather?" }
+            ]
           },
           "final_response": {
+            "role": "model",
             "parts": [
-              {
-                "text": "I am sorry, I cannot help you with this question. My capabilities are limited to analyzing code repositories."
-              }
-            ],
-            "role": "model"
+              { "text": "I can help you navigate github repositories, which github repository would you like to explore?" }
+            ]
           },
           "intermediate_data": {
             "tool_uses": [],
@@ -65,29 +58,34 @@
       "session_input": null,
       "creation_timestamp": 1678886401.0
     },
+
     {
       "eval_id": "case_2",
       "conversation": [
         {
-          "invocation_id": "unique-invocation-id-case-1",
+          "invocation_id": "invocation-case-2",
           "user_content": {
+            "role": "user",
             "parts": [
-              {
-                "text": "What is https://github.com/VandanaJn/chatbot-backend about?"
-              }
-            ],
-            "role": "user"
+              { "text": "What is https://github.com/VandanaJn/chatbot-backend about?" }
+            ]
           },
           "final_response": {
+            "role": "model",
             "parts": [
               {
-                "text": "This repository is a backend for a chatbot application. It includes files related to: * Core Application Logic: app/main.py and app/__init__.py contain the main functionalities. * Data Indexing and Management: app/index_pdf.py suggests functionality for indexing PDF documents, and app/milvus_client.py uses Milvus, a vector database. * Configuration: .gitignore, LICENSE, and requirements.txt list dependencies."
+                "text": "This repository is a backend for a chatbot application. It contains core application files, PDF indexing utilities, Milvus vector database integration, and supporting configuration files."
               }
-            ],
-            "role": "model"
+            ]
           },
           "intermediate_data": {
             "tool_uses": [
+              {
+                "name": "extract_owner_and_repo",
+                "args": {
+                  "github_url": "https://github.com/VandanaJn/chatbot-backend"
+                }
+              },
               {
                 "name": "transfer_to_agent",
                 "args": {
@@ -99,7 +97,7 @@
                 "args": {
                   "owner": "VandanaJn",
                   "repo_name": "chatbot-backend",
-                  "max_depth":2
+                  "max_depth": 2
                 }
               }
             ],
@@ -111,33 +109,32 @@
       "session_input": null,
       "creation_timestamp": 1678886402.0
     },
+
     {
       "eval_id": "case_3",
       "conversation": [
         {
-          "invocation_id": "unique-invocation-id-case-2",
+          "invocation_id": "invocation-case-3",
           "user_content": {
+            "role": "user",
             "parts": [
-              {
-                "text": "What is https://github.com/VandanaJn about?"
-              }
-            ],
-            "role": "user"
+              { "text": "What is https://github.com/VandanaJn about?" }
+            ]
           },
           "final_response": {
+            "role": "model",
             "parts": [
               {
                 "text": "Which repository under this owner should I analyze?"
               }
-            ],
-            "role": "model"
+            ]
           },
           "intermediate_data": {
             "tool_uses": [
               {
-                "name": "transfer_to_agent",
+                "name": "extract_owner_and_repo",
                 "args": {
-                  "agent_name": "Code_Architecture_Agent"
+                  "github_url": "https://github.com/VandanaJn"
                 }
               }
             ],

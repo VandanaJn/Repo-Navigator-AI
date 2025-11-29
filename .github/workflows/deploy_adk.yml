@@ -3,7 +3,6 @@ name: Deploy ADK Agent to Vertex AI
 on:
   push:
     branches:
-      - work 
       - main 
 
 env:
