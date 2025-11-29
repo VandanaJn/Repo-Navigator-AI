@@ -47,6 +47,44 @@ GITHUB_TOKEN=your_github_token
 make test
 ```
 
+## Makefile Targets
+You can use the provided Makefile to run common tasks:
+
+| Target   | Description                                 |
+|----------|---------------------------------------------|
+| install  | Create venv and install dependencies        |
+| run      | Run the ADK agent (dev)                     |
+| web      | Start the ADK web server (dev)              |
+| test     | Run all tests with coverage                 |
+| clean    | Remove the virtual environment              |
+
+### Usage (Windows PowerShell)
+```powershell
+# Install dependencies and create venv
+make install
+
+# Run the ADK agent
+make run
+
+# Start the ADK web server
+make web
+
+# Run tests with coverage
+make test
+
+# Remove the virtual environment
+make clean
+```
+
+### Usage (Linux/macOS)
+```bash
+make install
+make run
+make web
+make test
+make clean
+```
+
 ## Testing & CI
 - Integration tests use a `FakeGithub` client (see `tests/integration/conftest.py`) for deterministic repo/file responses.
 - LLM calls are live by default; you can mock/stub for full determinism.
@@ -78,6 +116,22 @@ Repo-Navigator-AI/
 - To change evaluation thresholds, edit the relevant `test_config.json` files.
 - To mock LLM responses, add stubs in `conftest.py` or use a test agent.
 - To add new tools or sub-agents, extend `agent.py` and `sub_agents/`.
+
+## Deployment
+
+### Deploy to Vertex AI
+
+This project uses GitHub Actions to automatically deploy the ADK agent to Google Cloud Vertex AI. The deployment workflow is defined in `.github/workflows/deploy_adk.yml`.
+
+#### Prerequisites
+- A Google Cloud project with Vertex AI enabled.
+- A GCP service account with appropriate permissions for Vertex AI.
+- GitHub secrets configured:
+  - `GCP_SA_KEY` — JSON key for the GCP service account.
+  - `PROJECT_ID` — Your Google Cloud project ID.
+
+#### Automatic Deployment
+Pushing to the `main` branch triggers automatic deployment via GitHub Actions.
 
 ## License
 See `LICENSE` for details.
