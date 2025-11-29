@@ -13,9 +13,7 @@ A master agent for analyzing GitHub repositories and answering architecture ques
 
 ### 1. Install dependencies
 ```powershell
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
+make install
 ```
 
 ### 2. Set up environment variables
@@ -46,7 +44,7 @@ GITHUB_TOKEN=your_github_token
 
 ### 3. Run tests
 ```powershell
-.venv\Scripts\python.exe -m pytest -q -o log_cli=true -o log_cli_level=INFO
+make test
 ```
 
 ## Testing & CI
@@ -84,5 +82,44 @@ Repo-Navigator-AI/
 ## License
 See `LICENSE` for details.
 
+## Makefile Targets
+You can use the provided Makefile to run common tasks:
+
+| Target   | Description                                 |
+|----------|---------------------------------------------|
+| install  | Create venv and install dependencies        |
+| run      | Run the ADK agent (dev)                     |
+| web      | Start the ADK web server (dev)              |
+| test     | Run all tests with coverage                 |
+| clean    | Remove the virtual environment              |
+
+### Usage (Windows PowerShell)
+```powershell
+# Install dependencies and create venv
+make install
+
+# Run the agent
+make run
+
+# Start the web server
+make web
+
+# Run tests with coverage
+make test
+
+# Remove the virtual environment
+make clean
+```
+
+### Usage (Linux/macOS)
+```bash
+make install
+make run
+make web
+make test
+make clean
+```
+
 ## Maintainer
 VandanaJn
+
