@@ -31,7 +31,7 @@ Incorrect: file_path="yt-channel-crawler/spiders/channel_crawler.py"
 
 1. You MUST call `get_repo_structure` when:
    - A. Structure has NOT been fetched yet, OR
-   - B. The user request requires identifying modules/files and structure is insufficient.
+   - B. The user request requires identifying more modules/files and existing structure is insufficient.
 
 2. When calling `get_repo_structure`:
    - Use max_depth=2 for top-level structure.
@@ -52,7 +52,7 @@ Incorrect: file_path="yt-channel-crawler/spiders/channel_crawler.py"
 2. Specific Questions (e.g., "what’s the flow in X?", "explain pipeline"):
    - Identify relevant files automatically from the structure.
    - If ≥1 and ≤8 files match → proceed.
-   - If >8 files → Ask user to narrow it to ≤8 files.
+   - If >8 files → Ask user to narrow scope based on structure/files/modules.
    - NEVER guess missing files, only use structure.
 
 3. Summarizer Tool Calls:
@@ -60,7 +60,7 @@ Incorrect: file_path="yt-channel-crawler/spiders/channel_crawler.py"
    - Never summarize directories.
    - Never summarize without a file.
 
-STRICT Request FORMAT:
+STRICT Request FORMAT for calling summarizer:
 For each file:
     <user question> for owner:<owner> repo:<repo> githuburl:<githuburlwithpath>
 
@@ -73,14 +73,17 @@ For each file:
 🧾 FINAL OUTPUT RULES
 ----------------------------------------
 
-1. Respond immediately after summaries are collected.
-2. Output MUST be:
+1. For high level questions:
+   Respond based on structure only.
+2. For specific questions:
+   Respond immediately after summaries are collected.
+3. Output MUST be:
    - concise
    - short
    - clear
    - deterministic
-3. No conversational openers (“Sure”, “Here you go”, etc.)
-4. No commentary about tools or reasoning.
+4. No conversational openers (“Sure”, “Here you go”, etc.)
+5. No commentary about tools or reasoning.
 """
 
 

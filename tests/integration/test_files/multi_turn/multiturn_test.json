@@ -20,7 +20,7 @@
             "role": "model",
             "parts": [
               {
-                "text": "This repository contains a YouTube channel transcription pipeline. It includes batch_transcribe_v2.py, dependency files, a Makefile, and licensing information. The main script handles downloading audio, processing it, and generating transcripts."
+                "text": "This repository contains a YouTube channel transcription pipeline. It includes batch_transcribe_v3.py, dependency files, a Makefile, and licensing information. The main script handles downloading audio, processing it, and generating transcripts."
               }
             ]
           },
@@ -57,7 +57,7 @@
             "role": "user",
             "parts": [
               {
-                "text": "what's the flow in batch_transcribe_v2 pipeline"
+                "text": "what's the flow in batch_transcribe_v3 pipeline"
               }
             ]
           },
@@ -74,7 +74,7 @@
               {
                 "name": "Code_Summarizer_for_architecture",
                 "args": {
-                  "request": "what is the transcribe flow for owner:VandanaJn repo:yt-channel-crawler githuburl:https://github.com/VandanaJn/yt-channel-crawler/blob/main/batch_transcribe_v2.py"
+                  "request": "what is the transcribe flow for owner:VandanaJn repo:yt-channel-crawler githuburl:https://github.com/VandanaJn/yt-channel-crawler/blob/main/batch_transcribe_v3.py"
                 }
               },
               {
@@ -82,7 +82,7 @@
                 "args": {
                   "owner": "VandanaJn",
                   "repo_name": "yt-channel-crawler",
-                  "file_path": "batch_transcribe_v2.py"
+                  "file_path": "batch_transcribe_v3.py"
                 }
               }
             ],

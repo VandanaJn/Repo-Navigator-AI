@@ -33,16 +33,17 @@ class FakeRepo:
         if owner_repo.endswith("yt-channel-crawler"):
             if p == "" or p == ".":
                 return [
-                    FakeItem("file", "batch_transcribe_v2.py", "batch_transcribe_v2.py", 1234),
+                    FakeItem("file", "batch_transcribe_v3.py", "batch_transcribe_v3.py", 1234),
+                    FakeItem("file", "requirements.txt", "requirements.txt", 40),
                     FakeItem("file", "Makefile", "Makefile", 128),
                 ]
-            if p == "batch_transcribe_v2.py":
+            if p == "batch_transcribe_v3.py":
                 content = (
-                    "# batch_transcribe_v2.py\n" 
+                    "# batch_transcribe_v3.py\n" 
                     "# pipeline: download audio -> convert -> transcribe with Whisper\n"
                     "def transcribe():\n    pass\n"
                 ).encode("utf-8")
-                return FakeContent("batch_transcribe_v2.py", "batch_transcribe_v2.py", content)
+                return FakeContent("batch_transcribe_v3.py", "batch_transcribe_v3.py", content)
 
         if owner_repo.endswith("chatbot-backend"):
             if p == "" or p == ".":
