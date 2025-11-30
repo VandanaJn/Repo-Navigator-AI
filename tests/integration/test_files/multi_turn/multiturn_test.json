@@ -47,7 +47,7 @@
             "role": "model",
             "parts": [
               {
-                "text": "This repository contains a YouTube channel transcription pipeline. It includes batch_transcribe_v3.py, dependency files, a Makefile, and licensing information. The main script handles downloading audio, processing it, and generating transcripts."
+                "text": "This repository contains a YouTube channel transcription pipeline. It includes batch_transcribe_v3.py, and requirements.txt. The main script handles downloading audio, processing it, and generating transcripts."
               }
             ]
           },

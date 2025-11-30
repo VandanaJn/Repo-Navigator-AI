@@ -35,7 +35,6 @@ class FakeRepo:
                 return [
                     FakeItem("file", "batch_transcribe_v3.py", "batch_transcribe_v3.py", 1234),
                     FakeItem("file", "requirements.txt", "requirements.txt", 40),
-                    FakeItem("file", "Makefile", "Makefile", 128),
                 ]
             if p == "batch_transcribe_v3.py":
                 content = (
@@ -44,6 +43,12 @@ class FakeRepo:
                     "def transcribe():\n    pass\n"
                 ).encode("utf-8")
                 return FakeContent("batch_transcribe_v3.py", "batch_transcribe_v3.py", content)
+            if p == "requirements.txt":
+                content = (
+                    "google-cloud-storage==2.5.0\n"
+                    "whisper==20230314\n"
+                ).encode("utf-8")
+                return FakeContent("requirements.txt", "requirements.txt", content)
 
         if owner_repo.endswith("chatbot-backend"):
             if p == "" or p == ".":
@@ -52,6 +57,27 @@ class FakeRepo:
                     FakeItem("file", "pdf_indexer.py", "pdf_indexer.py", 2048),
                     FakeItem("file", "milvus_integration.py", "milvus_integration.py", 1024),
                 ]
+            if p == "app.py":
+                content = (
+                    "# app.py\n"
+                    "from flask import Flask\n"
+                    "app = Flask(__name__)\n"
+                    "@app.route('/')\n"
+                    "def home():\n    return 'Hello, World!'\n"
+                ).encode("utf-8")
+                return FakeContent("app.py", "app.py", content)
+            if p == "pdf_indexer.py":
+                content = (
+                    "# pdf_indexer.py\n"
+                    "def index_pdf(file_path):\n    pass\n"
+                ).encode("utf-8")
+                return FakeContent("pdf_indexer.py", "pdf_indexer.py", content)
+            if p == "milvus_integration.py":
+                content = (
+                    "# milvus_integration.py\n"
+                    "def connect_milvus():\n    pass\n"
+                ).encode("utf-8")
+                return FakeContent("milvus_integration.py", "milvus_integration.py", content)
 
         # Default: empty directory
         return []
