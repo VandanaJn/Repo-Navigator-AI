@@ -31,7 +31,7 @@ to understand the flow and architecture of the system.
 
 DESCRIPTION_FILE_SUMMARIZER = "An assistant that can read a file and summarize it to be useful for understanding architecture."
 file_architecture_summarizer_agent = LlmAgent(
-    name="Code_Summarizer_for_architecture",
+    name="code_summarizer",
     model="gemini-2.5-flash-lite", 
     instruction=INSTRUCTION_FILE_SUMMARIZER,
     description=DESCRIPTION_FILE_SUMMARIZER,

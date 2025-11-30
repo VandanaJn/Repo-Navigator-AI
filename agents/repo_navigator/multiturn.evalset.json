@@ -3,14 +3,14 @@
   "name": "multiturn",
   "eval_cases": [
     {
-      "eval_id": "case1",
+      "eval_id": "about_followed_by_flow",
       "conversation": [
         {
-          "invocation_id": "e-6c73d6e0-4a97-4cb6-a66e-b3d9661aed8e",
+          "invocation_id": "e-e1b87b0d-a172-43f8-9a89-f8897f5c5e72",
           "user_content": {
             "parts": [
               {
-                "text": "whats the architecture of https://github.com/VandanaJn/yt-channel-crawler"
+                "text": "what is https://github.com/VandanaJn/chatbot-backend about"
               }
             ],
             "role": "user"
@@ -18,7 +18,7 @@
           "final_response": {
             "parts": [
               {
-                "text": "The repository 'yt-channel-crawler' contains the following files:\n- .gitignore\n- LICENSE\n- Makefile\n- batch_transcribe_v2.py\n- requirements.txt\n\nThe primary Python script appears to be `batch_transcribe_v2.py`, which likely handles the core functionality of transcribing YouTube channel content. The other files are standard for a software project: `.gitignore` for version control, `LICENSE` for legal information, `Makefile` for build/task automation, and `requirements.txt` for dependency management.\n\nWithout more specific questions about the code within these files, a detailed architectural breakdown cannot be provided."
+                "text": "This repository contains Python code for a chatbot backend. It includes modules for indexing PDFs, interacting with a Milvus client for data storage and retrieval, and a main application file. It also has a license file, a gitignore file, and a requirements file for dependencies."
               }
             ],
             "role": "model"
@@ -31,9 +31,18 @@
                   "parts": [
                     {
                       "function_call": {
-                        "id": "adk-2bc20342-56f7-4ca2-b135-f519001d5abe",
+                        "id": "adk-f8701157-25c5-484a-b366-6fdd87ecd0b7",
                         "args": {
-                          "agent_name": "Code_Architecture_Agent"
+                          "github_url": "https://github.com/VandanaJn/chatbot-backend"
+                        },
+                        "name": "extract_owner_and_repo"
+                      }
+                    },
+                    {
+                      "function_call": {
+                        "id": "adk-fa77a312-1d5f-46e3-8041-317354afe9e6",
+                        "args": {
+                          "agent_name": "code_architecture_agent"
                         },
                         "name": "transfer_to_agent"
                       }
@@ -48,7 +57,17 @@
                   "parts": [
                     {
                       "function_response": {
-                        "id": "adk-2bc20342-56f7-4ca2-b135-f519001d5abe",
+                        "id": "adk-f8701157-25c5-484a-b366-6fdd87ecd0b7",
+                        "name": "extract_owner_and_repo",
+                        "response": {
+                          "owner": "VandanaJn",
+                          "repo": "chatbot-backend"
+                        }
+                      }
+                    },
+                    {
+                      "function_response": {
+                        "id": "adk-fa77a312-1d5f-46e3-8041-317354afe9e6",
                         "name": "transfer_to_agent",
                         "response": {
                           "result": null
@@ -65,10 +84,11 @@
                   "parts": [
                     {
                       "function_call": {
-                        "id": "adk-c11043b7-fc52-4414-9073-e40b35a2ea62",
+                        "id": "adk-50a1bb7c-4141-4229-978d-0fb3c664b288",
                         "args": {
+                          "max_depth": 2,
                           "owner": "VandanaJn",
-                          "repo_name": "yt-channel-crawler"
+                          "repo_name": "chatbot-backend"
                         },
                         "name": "get_repo_structure"
                       }
@@ -83,33 +103,55 @@
                   "parts": [
                     {
                       "function_response": {
-                        "id": "adk-c11043b7-fc52-4414-9073-e40b35a2ea62",
+                        "id": "adk-50a1bb7c-4141-4229-978d-0fb3c664b288",
                         "name": "get_repo_structure",
                         "response": {
                           ".gitignore": {
                             "type": "file",
                             "path": ".gitignore",
-                            "size": 4916
+                            "size": 4700
                           },
                           "LICENSE": {
                             "type": "file",
                             "path": "LICENSE",
                             "size": 1066
                           },
-                          "Makefile": {
+                          "README.md": {
                             "type": "file",
-                            "path": "Makefile",
-                            "size": 802
+                            "path": "README.md",
+                            "size": 3573
                           },
-                          "batch_transcribe_v2.py": {
-                            "type": "file",
-                            "path": "batch_transcribe_v2.py",
-                            "size": 7527
+                          "app": {
+                            "__init__.py": {
+                              "type": "file",
+                              "path": "app/__init__.py",
+                              "size": 0
+                            },
+                            "index_pdf.py": {
+                              "type": "file",
+                              "path": "app/index_pdf.py",
+                              "size": 5614
+                            },
+                            "main.py": {
+                              "type": "file",
+                              "path": "app/main.py",
+                              "size": 5599
+                            },
+                            "milvus_cleanup.py": {
+                              "type": "file",
+                              "path": "app/milvus_cleanup.py",
+                              "size": 983
+                            },
+                            "milvus_client.py": {
+                              "type": "file",
+                              "path": "app/milvus_client.py",
+                              "size": 4485
+                            }
                           },
                           "requirements.txt": {
                             "type": "file",
                             "path": "requirements.txt",
-                            "size": 111
+                            "size": 142
                           }
                         }
                       }
@@ -120,14 +162,14 @@
               }
             ]
           },
-          "creation_timestamp": 1763938858.321862
+          "creation_timestamp": 1764467912.429963
         },
         {
-          "invocation_id": "e-36ed8008-d451-4a83-ac4e-c45ff500ec7f",
+          "invocation_id": "e-5060e8d6-4235-4610-8711-f3ce90dd324e",
           "user_content": {
             "parts": [
               {
-                "text": "what's the trancription flow"
+                "text": "explain the chat flow"
               }
             ],
             "role": "user"
@@ -135,7 +177,7 @@
           "final_response": {
             "parts": [
               {
-                "text": "The transcription flow in `batch_transcribe_v2.py` is as follows:\n\n1. **Update Video Metadata**:\n   - Fetches the latest video metadata (title, description, URL) from a YouTube channel using the YouTube Data API.\n   - It checks for an existing JSON file (`JASON_PATH`) to avoid re-processing videos.\n   - If a video is new or its metadata has changed, it updates the JSON file.\n\n2. **Download Audio**:\n   - Iterates through the videos listed in the JSON file.\n   - For each video, it uses `yt-dlp` to download the audio, converting it to an MP3 format with a specified quality (`AUDIO_QUALITY`).\n   - The downloaded audio files are saved to a designated folder (`AUDIO_FOLDER`).\n   - The JSON file is updated with the filename of the downloaded audio.\n\n3. **Generate Transcripts**:\n   - Loads an English Whisper model (size specified by `MODEL_SIZE`).\n   - Iterates through the videos in the JSON file again.\n   - For each video, if the transcript is not already present and the audio file exists:\n     - It transcribes the audio using the Whisper model.\n     - Appends the video title, cleaned description, and the generated transcript to an output file (`OUTPUT_FILE`).\n     - It also adds the video URL to a set to keep track of already transcribed videos, preventing duplicates.\n\nEssentially, it's a pipeline: fetch metadata -> download audio -> transcribe audio to text."
+                "text": "The chat flow involves the following steps:\n\n1.  **User Input:** The user sends a message through a FastAPI endpoint (`/chat`).\n2.  **Contextual Query Rewriting:** The system uses the conversation history and the latest user message to rewrite the query, making it more context-aware. This is done using the OpenAI API.\n3.  **Information Retrieval:** The rewritten query is used to search for relevant information or passages, likely from a Milvus database (as indicated by `app.milvus_client` and `app.index_pdf.py`).\n4.  **Response Generation:** The retrieved passages are combined with the user's original question and a system prompt. This augmented prompt is then sent to the OpenAI API to generate a response. The system prompt guides the AI to act as a spiritual guru, providing witty and compassionate answers based on the provided context.\n5.  **History Management:** The conversation history is managed to maintain a relevant context for future interactions, with a maximum length enforced.\n6.  **Output:** The generated response is returned to the user.\n\nThe `app/main.py` file orchestrates this flow using FastAPI and integrates with OpenAI for language generation and Milvus for context retrieval."
               }
             ],
             "role": "model"
@@ -148,11 +190,12 @@
                   "parts": [
                     {
                       "function_call": {
-                        "id": "adk-1265f989-99f3-47dc-b339-b846b984299d",
+                        "id": "adk-ca79f618-5e1b-4934-9008-39b3ec4027c8",
                         "args": {
-                          "agent_name": "Code_Summarizer_for_architecture"
+                          "repo_name": "chatbot-backend",
+                          "owner": "VandanaJn"
                         },
-                        "name": "transfer_to_agent"
+                        "name": "get_repo_structure"
                       }
                     }
                   ],
@@ -165,10 +208,56 @@
                   "parts": [
                     {
                       "function_response": {
-                        "id": "adk-1265f989-99f3-47dc-b339-b846b984299d",
-                        "name": "transfer_to_agent",
+                        "id": "adk-ca79f618-5e1b-4934-9008-39b3ec4027c8",
+                        "name": "get_repo_structure",
                         "response": {
-                          "result": null
+                          ".gitignore": {
+                            "type": "file",
+                            "path": ".gitignore",
+                            "size": 4700
+                          },
+                          "LICENSE": {
+                            "type": "file",
+                            "path": "LICENSE",
+                            "size": 1066
+                          },
+                          "README.md": {
+                            "type": "file",
+                            "path": "README.md",
+                            "size": 3573
+                          },
+                          "app": {
+                            "__init__.py": {
+                              "type": "file",
+                              "path": "app/__init__.py",
+                              "size": 0
+                            },
+                            "index_pdf.py": {
+                              "type": "file",
+                              "path": "app/index_pdf.py",
+                              "size": 5614
+                            },
+                            "main.py": {
+                              "type": "file",
+                              "path": "app/main.py",
+                              "size": 5599
+                            },
+                            "milvus_cleanup.py": {
+                              "type": "file",
+                              "path": "app/milvus_cleanup.py",
+                              "size": 983
+                            },
+                            "milvus_client.py": {
+                              "type": "file",
+                              "path": "app/milvus_client.py",
+                              "size": 4485
+                            }
+                          },
+                          "requirements.txt": {
+                            "type": "file",
+                            "path": "requirements.txt",
+                            "size": 142
+                          }
                         }
                       }
                     }
@@ -177,18 +266,16 @@
                 }
               },
               {
-                "author": "Code_Summarizer_for_architecture",
+                "author": "Code_Architecture_Agent",
                 "content": {
                   "parts": [
                     {
                       "function_call": {
-                        "id": "adk-bfc4b147-bb90-419a-8a3d-ac1399f1f4a2",
+                        "id": "adk-88aa18cd-0d57-4bde-94e6-29f77f2794a4",
                         "args": {
-                          "repo_name": "yt-channel-crawler",
-                          "owner": "VandanaJn",
-                          "file_path": "batch_transcribe_v2.py"
+                          "request": "Explain the chat flow for owner:VandanaJn repo:chatbot-backend githuburl:https://github.com/VandanaJn/chatbot-backend/blob/main/app/main.py"
                         },
-                        "name": "read_file_content"
+                        "name": "code_summarizer"
                       }
                     }
                   ],
@@ -196,15 +283,15 @@
                 }
               },
               {
-                "author": "Code_Summarizer_for_architecture",
+                "author": "Code_Architecture_Agent",
                 "content": {
                   "parts": [
                     {
                       "function_response": {
-                        "id": "adk-bfc4b147-bb90-419a-8a3d-ac1399f1f4a2",
-                        "name": "read_file_content",
+                        "id": "adk-88aa18cd-0d57-4bde-94e6-29f77f2794a4",
+                        "name": "code_summarizer",
                         "response": {
-                          "result": "import os\nimport requests\nimport whisper\nimport yt_dlp\nfrom dotenv import load_dotenv\nimport json\nimport re\nimport unicodedata\nfrom pathlib import Path\n# === CONFIG ===\n\nNUM_VIDEOS = os.getenv(\"NUM_VIDEOS\")\nOUTPUT_FILE = os.getenv(\"OUTPUT_FILE\")\nMODEL_SIZE = os.getenv(\"WHISPER_MODEL_SIZE\")\nAUDIO_QUALITY = os.getenv(\"AUDIO_QUALITY\")\nAPI_KEY = os.getenv(\"YOUTUBE_API_KEY\")\nCHANNEL_ID = os.getenv(\"CHANNEL_ID\") \nJASON_PATH = os.getenv(\"JASON_PATH\")\nAUDIO_FOLDER=os.getenv(\"AUDIO_FOLDER\")\n\ndef get_filename(title):\n    # Normalize Unicode\n    title = unicodedata.normalize(\"NFKD\", title)\n    # Remove HTML entities\n    title = title.replace(\"&quot;\", \"\").replace(\"&#39;\", \"\").replace(\"&amp;\", \"and\")\n    # Replace punctuation and spaces with underscores\n    title = re.sub(r\"[^\\w\\s-]\", \"\", title)\n    title = re.sub(r\"[\\s\\-]+\", \"_\", title)\n    # Lowercase and trim\n    return title.lower().strip(\"_\")\n\ndef update_video_metadata_json():\n    print(\"📺 Fetching latest video metadata...\")\n    # Load existing JSON\n    if os.path.exists(JASON_PATH):\n        with open(JASON_PATH, \"r\", encoding=\"utf-8\") as f:\n            existing_log = json.load(f)\n            existing_ids = {entry[\"video_id\"] for entry in existing_log}\n    else:\n        existing_log = []\n        existing_ids = set()\n\n    # Step 1: Get latest video IDs\n    search_url = 'https://www.googleapis.com/youtube/v3/search'\n    search_params = {\n        'key': API_KEY,\n        'channelId': CHANNEL_ID,\n        'part': 'snippet',\n        'order': 'date',\n        'maxResults': NUM_VIDEOS,\n        'type': 'video'\n    }\n    search_response = requests.get(search_url, params=search_params)\n    items = search_response.json().get(\"items\", [])\n    video_ids = [item['id']['videoId'] for item in items]\n\n    # Step 2: Get full metadata\n    videos_url = \"https://www.googleapis.com/youtube/v3/videos\"\n    videos_params = {\n        \"key\": API_KEY,\n        \"id\": \",\".join(video_ids),\n        \"part\": \"snippet\"\n    }\n    videos_response = requests.get(videos_url, params=videos_params)\n\n    updated_log = existing_log.copy()\n    for item in videos_response.json().get(\"items\", []):\n        video_id = item['id']\n        title = item[\"snippet\"][\"title\"]\n        description = clean_description(item[\"snippet\"][\"description\"])\n        url = f\"https://www.youtube.com/watch?v={video_id}\"\n\n        # Update or append\n        existing_entry = next((e for e in updated_log if e[\"video_id\"] == video_id), None)\n        if existing_entry:\n            existing_entry.update({\"title\": title, \"url\": url, \"description\": description})\n            print(f\"🔄 Updated: {title}\")\n        else:\n            updated_log.append({\n                \"video_id\": video_id,\n                \"title\": title,\n                \"url\": url,\n                \"description\": description\n            })\n            print(f\"➕ Added: {title}\")\n\n    with open(JASON_PATH, \"w\", encoding=\"utf-8\") as f:\n        json.dump(updated_log, f, indent=2)\n    print(\"📦 Metadata JSON updated.\")\n    \ndef download_audio(video_url, output_path):\n    print(f\"🔻 Downloading audio from {video_url}\")\n\n    Path(AUDIO_FOLDER).mkdir(parents=True, exist_ok=True)\n\n    ydl_opts = {\n        'format': 'bestaudio/best',\n        'outtmpl': str(Path(AUDIO_FOLDER) / output_path),\n        'postprocessors': [{\n            'key': 'FFmpegExtractAudio',\n            'preferredcodec': 'mp3',\n            'preferredquality': AUDIO_QUALITY,\n        }],\n    }\n\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        ydl.download([video_url])\n\n    print(\"✅ Audio downloaded.\")\n    \ndef download_mp3s_from_json():\n    print(\"🎧 Checking audio downloads...\")\n    if not os.path.exists(JASON_PATH):\n        print(\"⚠️ No JSON found.\")\n        return\n\n    with open(JASON_PATH, \"r\", encoding=\"utf-8\") as f:\n        queue = json.load(f)\n\n    updated = False\n    for entry in queue:\n        title = entry[\"title\"]\n        url = entry[\"url\"]\n        video_id = entry[\"video_id\"]\n        filename_without_extension = get_filename(title) \n        filename = get_filename(title) +\".mp3\"\n        audio_path = str(Path(AUDIO_FOLDER) / filename)\n\n        if \"filename\" in entry and os.path.exists(audio_path):\n            print(f\"⏩ Already downloaded: {filename}\")\n            continue\n\n        download_audio(url, filename_without_extension)\n        entry[\"filename\"] = filename\n        updated = True\n\n    if updated:\n        with open(JASON_PATH, \"w\", encoding=\"utf-8\") as f:\n            json.dump(queue, f, indent=2)\n        print(\"📦 JSON updated with filenames.\")\n        \ndef transcribe_and_append():\n    print(\"🧠 Starting transcription...\")\n    if not os.path.exists(JASON_PATH):\n        print(\"⚠️ No JSON found.\")\n        return\n\n    with open(JASON_PATH, \"r\", encoding=\"utf-8\") as f:\n        queue = json.load(f)\n\n    # Collect existing URLs from Markdown\n    existing_urls = set()\n    if os.path.exists(OUTPUT_FILE):\n        with open(OUTPUT_FILE, \"r\", encoding=\"utf-8\") as f:\n            for line in f:\n                if line.startswith(\"http\"):\n                    existing_urls.add(line.strip())\n\n    model = whisper.load_model(MODEL_SIZE)\n\n    for entry in queue:\n        url = entry[\"url\"]\n        title = entry[\"title\"]\n        description = entry.get(\"description\", \"\").strip()\n        filename = entry.get(\"filename\")\n        audio_path = str(Path(AUDIO_FOLDER) / filename) if filename else None\n\n        if url in existing_urls:\n            print(f\"⏩ Already transcribed: {title}\")\n            continue\n        if not audio_path or not os.path.exists(audio_path):\n            print(f\"⚠️ Missing audio: {title}\")\n            continue\n\n        print(f\"🧘‍♀️ Transcribing: {title}\")\n        transcript = model.transcribe(audio_path)[\"text\"]\n\n        with open(OUTPUT_FILE, \"a\", encoding=\"utf-8\") as f:\n            f.write(f\"{title} ({url})\\n\")\n            f.write(f\"summary: {description}\\n\")\n            f.write(f\"transcript: {transcript}\\n\\n\")\n\n    print(\"🌸 Transcripts appended.\")\n    \ndef clean_description(text):\n    text = re.sub(r\"#\\w+\", \"\", text)\n    text = re.sub(r\"\\[\\d{1,2}:\\d{2}(?::\\d{2})?\\]\", \"\", text)\n    return re.sub(r\"\\s+\", \" \", text).replace(\"Subtitles by the Amara.org community\", \"\").strip()\n\ndef generate_transcripts_to_json():\n    print(\"🧠 Starting transcript generation...\")\n\n    if not os.path.exists(JASON_PATH):\n        print(\"⚠️ No JSON file found.\")\n        return\n\n    with open(JASON_PATH, \"r\", encoding=\"utf-8\") as f:\n        queue = json.load(f)\n\n    model = whisper.load_model(MODEL_SIZE)\n\n    for entry in queue:\n        filename = entry.get(\"filename\")\n        transcript = entry.get(\"transcript\")\n\n        if transcript:\n            print(f\"⏩ Already transcribed: {entry['title']}\")\n            continue\n\n        if not filename:\n            print(f\"⚠️ Missing filename for: {entry['title']}\")\n            continue\n\n        audio_path = str(Path(AUDIO_FOLDER) / filename)\n        if not os.path.exists(audio_path):\n            print(f\"⚠️ Audio file not found: {audio_path}\")\n            continue\n\n        print(f\"🎙️ Transcribing: {entry['title']}\")\n        result = model.transcribe(audio_path)\n        entry[\"transcript\"] = result[\"text\"].strip()\n\n        with open(JASON_PATH, \"w\", encoding=\"utf-8\") as f:\n            json.dump(queue, f, indent=2)\n        print(f\"📥 Updated JSON after: {entry['title']}\")\n\n        \n\n\nif __name__==\"__main__\":\n    update_video_metadata_json()\n    download_mp3s_from_json()\n    generate_transcripts_to_json()"
+                          "result": "File: app/main.py\n---\nThis Python file sets up a FastAPI web server for a chatbot application.\n\n**Key Components:**\n\n*   **Initialization:**\n    *   Loads environment variables (likely for API keys).\n    *   Initializes the FastAPI app and an OpenAI client.\n    *   Defines constants for managing conversation history length (`MAX_CONVERSATION_LENGTH`) and the number of recent exchanges to use for semantic search (`RECENT_EXCHANGES_FOR_SEARCH`).\n*   **CORS Middleware:** Configured to allow requests from `http://localhost:5173`.\n*   **System Prompt:** A `SYSTEM_PROMPT` is defined, instructing the AI to act as a \"witty and compassionate spiritual guru,\" guiding seekers with wisdom from retrieved passages. It emphasizes brevity, clarity, and anchoring responses in the provided context, with occasional mentions of sources.\n*   **Data Model:** A `ChatRequest` Pydantic model is defined to handle incoming chat requests, expecting a `user_id` and `text`.\n*   **`/chat` Endpoint:**\n    1.  Receives a `ChatRequest` (user ID and their message).\n    2.  Initializes conversation history for new users.\n    3.  **Query Rewriting:** It constructs a `search_query` by:\n        *   Extracting recent user-assistant exchanges from the conversation history.\n        *   Using the OpenAI API (gpt-4o-mini) to rewrite the user's latest query, incorporating the conversation history for better context.\n    4.  **Context Retrieval:** Calls `build_context` (presumably from `app.milvus_client`) with the rewritten `search_query` to fetch relevant passages. This likely involves semantic search in a Milvus database.\n    5.  **Response Generation:**\n        *   If no context is found, a fallback reply is generated.\n        *   Otherwise, a detailed `user_message` is constructed, including the retrieved passages and the original user question, along with instructions for the AI.\n        *   The conversation history is pruned to `MAX_CONVERSATION_LENGTH`.\n        *   The OpenAI API (gpt-4o-mini) is called with the system prompt and the augmented conversation history to generate a `reply`.\n    6.  The generated `reply` and the updated conversation history are returned.\n*   **`/health` Endpoint:** A simple health check endpoint returning `{\"status\": \"ok\"}`.\n*   **Main Execution Block:** Uses `uvicorn` to run the FastAPI application when the script is executed directly.\n\n**Overall Flow:**\n\nUser sends a message -> Backend (FastAPI) receives it -> Rewrites query with conversation history -> Retrieves relevant passages (Milvus) -> Augments prompt with passages -> Generates AI response (OpenAI) -> Returns response to user.\n"
                         }
                       }
                     }
@@ -214,15 +301,15 @@
               }
             ]
           },
-          "creation_timestamp": 1763938894.261937
+          "creation_timestamp": 1764467952.01666
         }
       ],
       "session_input": {
         "app_name": "repo_navigator",
         "user_id": "user"
       },
-      "creation_timestamp": 1763938939.471334
+      "creation_timestamp": 1764468027.5761156
     }
   ],
-  "creation_timestamp": 1763938683.3995461
+  "creation_timestamp": 1764467985.5681121
 }

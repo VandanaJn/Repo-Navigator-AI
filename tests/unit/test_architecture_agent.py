@@ -6,7 +6,7 @@ from google.adk.tools import AgentTool
 @pytest.fixture
 def expected_agent_config():
     return {
-        "name": "Code_Architecture_Agent",
+        "name": "code_architecture_agent",
         "model": "gemini-2.5-flash-lite",
         "instruction": INSTRUCTION_ARCHITECTURE,
         "description": DESCRIPTION_ARCHITECTURE,

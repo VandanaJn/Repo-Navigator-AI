@@ -54,7 +54,7 @@ else
 endif
 
 # ------------------------------------------------------------------------------------------------
-# Run ADK web server (dev)--this is not working in my dev yet, something about venv and adk
+# Run ADK web server
 # ------------------------------------------------------------------------------------------------
 web:
 ifeq ($(OS),Windows_NT)

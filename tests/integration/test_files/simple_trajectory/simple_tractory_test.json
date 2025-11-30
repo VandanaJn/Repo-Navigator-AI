@@ -90,7 +90,7 @@
               {
                 "name": "transfer_to_agent",
                 "args": {
-                  "agent_name": "Code_Architecture_Agent"
+                  "agent_name": "code_architecture_agent"
                 }
               },
               {
