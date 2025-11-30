@@ -7,7 +7,7 @@ from google.adk.tools import AgentTool
 def expected_agent_config():
     return {
         "name": "code_architecture_agent",
-        "model": "gemini-2.5-flash-lite",
+        "model": "gemini-2.5-pro",
         "instruction": INSTRUCTION_ARCHITECTURE,
         "description": DESCRIPTION_ARCHITECTURE,
         "tools": [get_repo_structure, AgentTool(file_architecture_summarizer_agent)],
