@@ -61,7 +61,7 @@ root_agent = LlmAgent(
     name=AGENT_NAME_ROOT,
     model="gemini-2.5-flash-lite",
     instruction=INSTRUCTION_ROOT,
-    description="A master agent capable of analyzing repositories and delegating architecture questions.",
+    description=DESCRIPTION_ROOT,
     tools=[extract_owner_and_repo],
     sub_agents=[architecture_summarizer_agent]
     )
