@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 from github import GithubException, RateLimitExceededException
 
 import repo_navigator.sub_agents.tools.githubtools   
-
+from repo_navigator.sub_agents.tools.githubtools import extract_owner_and_repo
 
 # ----------------------------
 # safe_get_contents()
@@ -181,3 +181,63 @@ def test_read_file_content_rate_limit_retry(mock_get_client):
 
     result = repo_navigator.sub_agents.tools.githubtools.read_file_content("me", "repo", "file.txt")
     assert result == "ok"
+
+@pytest.mark.parametrize("url_input, expected_output", [
+    # --- Valid URLs (Full Extraction) ---
+    # Full URL to a file
+    ("https://github.com/VandanaJn/yt-channel-crawler/blob/main/file.py", {'valid': True, 'owner': 'VandanaJn', 'repo': 'yt-channel-crawler'}),
+    # Full URL to the repo root
+    ("https://github.com/owner-test/repo-test", {'valid': True, 'owner': 'owner-test', 'repo': 'repo-test'}),
+    # URL with trailing slash
+    ("https://github.com/OwnerName/RepoName/", {'valid': True, 'owner': 'OwnerName', 'repo': 'RepoName'}),
+    # URL with query parameters/fragments
+    ("https://github.com/test-org/test-repo?query=1#fragment", {'valid': True, 'owner': 'test-org', 'repo': 'test-repo'}),
+    # Short path (assuming the context is github.com)
+    ("owner/repo", {'valid': True, 'owner': 'owner', 'repo': 'repo'}),
+    # Full domain without scheme (handled by your netloc logic)
+    ("github.com/owner/repo", {'valid': True, 'owner': 'owner', 'repo': 'repo'}),
+    # Path with branch/commit hash
+    ("https://github.com/user/project/tree/main/src", {'valid': True, 'owner': 'user', 'repo': 'project'}),
+    # Path with keywords in later segments
+    ("https://github.com/user/project/blob/main/issues/file.txt", {'valid': True, 'owner': 'user', 'repo': 'project'}),
+
+    # --- Owner Only (Valid=False) ---
+    # Only owner provided
+    ("https://github.com/just-owner", {'valid': False, 'owner': 'just-owner', 'repo': None}),
+    # Owner followed by a known GitHub keyword (should be treated as owner-only)
+    ("https://github.com/owner-only/issues", {'valid': False, 'owner': 'owner-only', 'repo': None}),
+    ("https://github.com/owner-only/pulls/123", {'valid': False, 'owner': 'owner-only', 'repo': None}),
+    ("https://github.com/owner-only/wiki", {'valid': False, 'owner': 'owner-only', 'repo': None}),
+    # Owner followed by an unrecognized keyword (should still pass if not in the list)
+    ("https://github.com/owner-only/some-other-word", {'valid': True, 'owner': 'owner-only', 'repo': 'some-other-word'}),
+    
+    # --- Invalid URLs (Failure Cases) ---
+    # Empty string
+    ("", {'valid': False, 'owner': None, 'repo': None}),
+    # None (should be handled by the initial check)
+    (None, {'valid': False, 'owner': None, 'repo': None}),
+    # Only the GitHub root
+    ("https://github.com/", {'valid': False, 'owner': None, 'repo': None}),
+    # Garbage input that might raise an exception
+    ("not-a-url-at-all", {'valid': False, 'owner': 'not-a-url-at-all', 'repo': None}), # Note: urlparse might yield this as owner
+])
+def test_extract_owner_and_repo(url_input, expected_output):
+    """
+    Tests various valid and invalid GitHub URL formats.
+    """
+    if url_input is None:
+        # Since the function checks `if not github_url`, passing None directly is fine.
+        result = extract_owner_and_repo(url_input)
+    else:
+        result = extract_owner_and_repo(url_input)
+        
+    assert result == expected_output
+
+def test_exception_handling():
+    """
+    Tests if the function handles non-string inputs gracefully (e.g., list or integer).
+    """
+    # This assumes non-string input will likely trigger an exception during string methods or url parsing
+    # and should be caught by your general try/except block.
+    assert extract_owner_and_repo(12345) == {'valid': False, 'owner': None, 'repo': None}
+    assert extract_owner_and_repo([]) == {'valid': False, 'owner': None, 'repo': None}
