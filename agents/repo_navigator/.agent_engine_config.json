@@ -5,7 +5,7 @@
     "cpu": "1",
     "memory": "1Gi"
   },
-   "environment_variables": {
+   "env_vars": {
       "GITHUB_TOKEN": "${GITHUB_TOKEN}"
     }
 }
