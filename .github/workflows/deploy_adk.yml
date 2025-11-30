@@ -8,6 +8,7 @@ env:
   REGION: us-west1 # Your desired GCP region (e.g., us-central1)
   AGENT_NAME: repo_navigator # Replace with the name of your ADK agent (e.g., 'repo_navigator_agent')
   ADK_AGENT_CONFIG_FILE: repo_navigator/.agent_engine_config.json # Path to your ADK config file
+  GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
 jobs:
   deploy:
