@@ -10,9 +10,10 @@ A master agent for analyzing GitHub repositories and answering architecture ques
 - Configurable evaluation metrics for response and tool usage matching.
 
 ## Architecture
-![Repo Navigator AI](assets/Repo Navigator AI.svg)
-
-*Figure: Multi-agent architecture overview — root agent delegates to sub-agents and tools.*
+<figure>
+  <img src="assets/repo-navigator-ai.svg" alt="Repo Navigator AI" />
+  <figcaption><em>Multi-agent architecture overview — root agent delegates to sub-agents and tools.</em></figcaption>
+</figure>
 
 ## Problem & Solution
 - **Problem (The "Why")**: Large, evolving codebases create heavy context-switching and wasted time; LLMs alone struggle to accurately analyze multi-file repositories and often hallucinate or miss execution flow, making onboarding and code review slow and error-prone.
