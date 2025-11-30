@@ -1,8 +1,4 @@
 # Repo-Navigator-AI
-<figure>
-  <img src="assets/repo-navigator-ai.svg" alt="Repo Navigator AI" />
-  <figcaption><em>Multi-agent architecture overview — root agent delegates to sub-agents and tools.</em></figcaption>
-</figure>
 
 A master agent for analyzing GitHub repositories and answering architecture questions using LLMs and tool-augmented agents.
 
@@ -12,15 +8,18 @@ A master agent for analyzing GitHub repositories and answering architecture ques
 - Uses tool calls to extract owner/repo from URLs and fetch repo/file content.
 - Integration tests with deterministic GitHub responses for CI stability.
 - Configurable evaluation metrics for response and tool usage matching.
+- Uses Google ADK to code multi agent system
+- Deploys the agent to Vertex AI
 
-## Architecture
-
-  <img src="assets/Repo Navigator AI Architecture" alt="Repo Navigator AI Architecture" />
-  
 
 ## Problem & Solution
 - **Problem (The "Why")**: Large, evolving codebases create heavy context-switching and wasted time; LLMs alone struggle to accurately analyze multi-file repositories and often hallucinate or miss execution flow, making onboarding and code review slow and error-prone.
 - **Solution (The "What")**: Repo Navigator Agent — an autonomous, deterministic multi-agent system built on Google ADK that layers tool calls and specialized sub-agents to reliably extract repository context, fetch files, and produce concise, deterministic architecture summaries.
+
+## Architecture
+
+<img src="assets/Repo Navigator AI Architecture.png" alt="Repo Navigator AI Architecture" />
+  
 
 ## Quick Start
 
