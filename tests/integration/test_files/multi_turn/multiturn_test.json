@@ -1,0 +1,125 @@
+{
+  "eval_set_id": "multiturn",
+  "name": "multiturn",
+  "creation_timestamp": 1678886400.0,
+  "eval_cases": [
+    {
+      "eval_id": "warmup_00",
+      "conversation": [
+        {
+          "invocation_id": "invocation-warmup-00",
+          "user_content": {
+            "role": "user",
+            "parts": [
+              { "text": "Hello" }
+            ]
+          },
+          "final_response": {
+            "role": "model",
+            "parts": [
+              { "text": "I can help you navigate github repositories, which github repository would you like to explore?" }
+            ]
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886401.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886401.0
+    },
+    {
+      "eval_id": "case1",
+      "conversation": [
+        {
+          "invocation_id": "case1-turn1",
+          "user_content": {
+            "role": "user",
+            "parts": [
+              {
+                "text": "what's https://github.com/VandanaJn/yt-channel-crawler about"
+              }
+            ]
+          },
+          "final_response": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "This repository contains a YouTube channel transcription pipeline. It includes batch_transcribe_v3.py, dependency files, a Makefile, and licensing information. The main script handles downloading audio, processing it, and generating transcripts."
+              }
+            ]
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "extract_owner_and_repo",
+                "args": {
+                  "github_url": "https://github.com/VandanaJn/yt-channel-crawler"
+                }
+              },
+              {
+                "name": "transfer_to_agent",
+                "args": {
+                  "agent_name": "Code_Architecture_Agent"
+                }
+              },
+              {
+                "name": "get_repo_structure",
+                "args": {
+                  "owner": "VandanaJn",
+                  "repo_name": "yt-channel-crawler",
+                  "max_depth": 2
+                }
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886401.0
+        },
+        {
+          "invocation_id": "case1-turn2",
+          "user_content": {
+            "role": "user",
+            "parts": [
+              {
+                "text": "what's the flow in batch_transcribe_v3 pipeline"
+              }
+            ]
+          },
+          "final_response": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "The script follows a simple pipeline: (1) fetch YouTube channel metadata, (2) download and convert audio, and (3) transcribe it using Whisper. It processes videos in batches and outputs text transcripts."
+              }
+            ]
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "Code_Summarizer_for_architecture",
+                "args": {
+                  "request": "what is the transcribe flow for owner:VandanaJn repo:yt-channel-crawler githuburl:https://github.com/VandanaJn/yt-channel-crawler/blob/main/batch_transcribe_v3.py"
+                }
+              },
+              {
+                "name": "read_file_content",
+                "args": {
+                  "owner": "VandanaJn",
+                  "repo_name": "yt-channel-crawler",
+                  "file_path": "batch_transcribe_v3.py"
+                }
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886402.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886403.0
+    }
+  ]
+}

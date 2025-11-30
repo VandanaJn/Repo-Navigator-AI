@@ -1,17 +1,20 @@
 name: Deploy ADK Agent to Vertex AI
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Python CI"]
+    types: [completed]
     branches:
-      - main # Trigger on pushes to the main branch
+      - main 
 
 env:
-  REGION: us-west2 # Your desired GCP region (e.g., us-central1)
-  AGENT_NAME: repo_navigator_agent # Replace with the name of your ADK agent (e.g., 'repo_navigator_agent')
-  ADK_AGENT_CONFIG_FILE: agents/repo_navigator/.agent_engine_config.json # Path to your ADK config file
+  REGION: us-west1 # Your desired GCP region (e.g., us-central1)
+  AGENT_NAME: repo_navigator # Replace with the name of your ADK agent (e.g., 'repo_navigator_agent')
+  ADK_AGENT_CONFIG_FILE: repo_navigator/.agent_engine_config.json # Path to your ADK config file
 
 jobs:
   deploy:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
     permissions:
@@ -21,10 +24,20 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Generate deployment version
+      id: version
+      run: |
+        VERSION=$(date +%Y%m%d-%H%M%S)
+        COMMIT_SHA=${{ github.event.workflow_run.head_commit.id }}
+        COMMIT_SHA_SHORT=${COMMIT_SHA:0:7}
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "commit_sha=$COMMIT_SHA_SHORT" >> $GITHUB_OUTPUT
+        echo "Deployment version: $VERSION (commit: $COMMIT_SHA_SHORT)"
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11' # Or your agent's required Python version
+        python-version: '3.13' # Or your agent's required Python version
 
     - name: Install Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
@@ -40,11 +53,24 @@ jobs:
         pip install google-adk
         pip install -r requirements.txt # Assuming you have a requirements.txt for your agent
 
-    - name: Deploy ADK Agent to Vertex AI
+    - name: Deploy ADK Agent to Vertex AI with versioning
       run: |
-        adk deploy agent_engine \
-          --project=${{ secrets.PROJECT_ID }} \
-          --region=${{ env.REGION }} \
-          ${{ env.AGENT_NAME }} \
-          --agent_engine_config_file=${{ env.ADK_AGENT_CONFIG_FILE }}
-      shell: bash # Ensure bash is used for `!` command
+        cd agents
+        VERSIONED_NAME="${{ env.AGENT_NAME }}-${{ steps.version.outputs.version }}"
+        echo "Deploying as: $VERSIONED_NAME"
+        adk deploy agent_engine "$VERSIONED_NAME" \
+          --project="${{ secrets.PROJECT_ID }}" \
+          --region="${{ env.REGION }}" \
+          --agent_engine_config_file="${{ env.ADK_AGENT_CONFIG_FILE }}" \
+          --labels="deployed_at=${{ steps.version.outputs.version }},commit=${{ steps.version.outputs.commit_sha }},branch=${{ github.event.workflow_run.head_branch }}"
+      shell: bash
+
+    - name: Output deployment info
+      run: |
+        echo "✅ Deployment Summary"
+        echo "Agent Name: ${{ env.AGENT_NAME }}-${{ steps.version.outputs.version }}"
+        echo "Commit: ${{ steps.version.outputs.commit_sha }}"
+        echo "Timestamp: ${{ steps.version.outputs.version }}"
+        echo "Region: ${{ env.REGION }}"
+        echo "Project: ${{ secrets.PROJECT_ID }}"
+

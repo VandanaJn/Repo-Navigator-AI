@@ -1,6 +1,7 @@
 import pytest
 from repo_navigator.agent import root_agent, INSTRUCTION_ROOT, DESCRIPTION_ROOT
 from repo_navigator.sub_agents.architecture_agent import architecture_summarizer_agent
+from repo_navigator.sub_agents.tools.githubtools import extract_owner_and_repo
 
 @pytest.fixture
 def expected_agent_config():
@@ -9,7 +10,7 @@ def expected_agent_config():
         "model": "gemini-2.5-flash-lite",
         "instruction": INSTRUCTION_ROOT,
         "description": DESCRIPTION_ROOT,
-        "tools": [],
+        "tools": [extract_owner_and_repo],
         "sub_agents": [architecture_summarizer_agent]
     }
 
