@@ -9,6 +9,15 @@ A master agent for analyzing GitHub repositories and answering architecture ques
 - Integration tests with deterministic GitHub responses for CI stability.
 - Configurable evaluation metrics for response and tool usage matching.
 
+## Architecture
+![Repo Navigator AI](assets/Repo Navigator AI.svg)
+
+*Figure: Multi-agent architecture overview — root agent delegates to sub-agents and tools.*
+
+## Problem & Solution
+- **Problem (The "Why")**: Large, evolving codebases create heavy context-switching and wasted time; LLMs alone struggle to accurately analyze multi-file repositories and often hallucinate or miss execution flow, making onboarding and code review slow and error-prone.
+- **Solution (The "What")**: Repo Navigator Agent — an autonomous, deterministic multi-agent system built on Google ADK that layers tool calls and specialized sub-agents to reliably extract repository context, fetch files, and produce concise, deterministic architecture summaries.
+
 ## Quick Start
 
 ### 1. Install dependencies
@@ -99,6 +108,7 @@ Repo-Navigator-AI/
 │       ├── agent.py
 │       └── sub_agents/
 │           ├── architecture_agent.py
+│           ├── file_summarizer_agent.py
 │           └── tools/
 │               └── githubtools.py
 ├── tests/
