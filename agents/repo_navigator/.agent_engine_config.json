@@ -6,6 +6,6 @@
     "memory": "1Gi"
   },
    "environment_variables": {
-      "GITHUB_TOKEN": "${GITHUBTOKEN}"
+      "GITHUB_TOKEN": "${GITHUB_TOKEN}"
     }
 }
