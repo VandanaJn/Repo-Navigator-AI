@@ -24,7 +24,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11' # Or your agent's required Python version
+        python-version: '3.13' # Or your agent's required Python version
 
     - name: Install Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
