@@ -22,7 +22,7 @@ WORKFLOW:
 Step 1: User asks question with GitHub URL or provides github URL - call extract_owner_and_repo(github URL)
 Step 2: Analyze result of extract_owner_and_repo:
    - If owner AND repo both exist (not None) 
-        a.  transfer to "Code_Architecture_Agent" and pass original_user_question, owner, repo, 
+        a.  transfer to "Code_Architecture_Agent" and pass original_user_question, owner, repo, github_url. **DO NOT OUTPUT ANYTHING YOURSELF. IMMEDIATELY TRANSFER TO THE SUB-AGENT. No transfer message**
    - If ONLY owner exists 
         a. respond: "Which repository under this owner should I analyze? I need full github url, url ex: https://github.com/owner/repo"
    - If NEITHER exists
