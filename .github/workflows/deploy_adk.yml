@@ -5,6 +5,7 @@ on:
     workflows: ["Python CI"]
     types: [completed]
     branches:
+      - work 
       - main 
 
 env:
@@ -14,7 +15,6 @@ env:
 
 jobs:
   deploy:
-    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
     permissions:
@@ -23,16 +23,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Generate deployment version
-      id: version
-      run: |
-        VERSION=$(date +%Y%m%d-%H%M%S)
-        COMMIT_SHA=${{ github.event.workflow_run.head_commit.id }}
-        COMMIT_SHA_SHORT=${COMMIT_SHA:0:7}
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
-        echo "commit_sha=$COMMIT_SHA_SHORT" >> $GITHUB_OUTPUT
-        echo "Deployment version: $VERSION (commit: $COMMIT_SHA_SHORT)"
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -53,24 +43,11 @@ jobs:
         pip install google-adk
         pip install -r requirements.txt # Assuming you have a requirements.txt for your agent
 
-    - name: Deploy ADK Agent to Vertex AI with versioning
+    - name: Deploy ADK Agent to Vertex AI
       run: |
         cd agents
-        VERSIONED_NAME="${{ env.AGENT_NAME }}-${{ steps.version.outputs.version }}"
-        echo "Deploying as: $VERSIONED_NAME"
-        adk deploy agent_engine "$VERSIONED_NAME" \
+        adk deploy agent_engine "${{ env.AGENT_NAME }}" \
           --project="${{ secrets.PROJECT_ID }}" \
           --region="${{ env.REGION }}" \
-          --agent_engine_config_file="${{ env.ADK_AGENT_CONFIG_FILE }}" \
-          --labels="deployed_at=${{ steps.version.outputs.version }},commit=${{ steps.version.outputs.commit_sha }},branch=${{ github.event.workflow_run.head_branch }}"
+          --agent_engine_config_file="${{ env.ADK_AGENT_CONFIG_FILE }}"
       shell: bash
-
-    - name: Output deployment info
-      run: |
-        echo "✅ Deployment Summary"
-        echo "Agent Name: ${{ env.AGENT_NAME }}-${{ steps.version.outputs.version }}"
-        echo "Commit: ${{ steps.version.outputs.commit_sha }}"
-        echo "Timestamp: ${{ steps.version.outputs.version }}"
-        echo "Region: ${{ env.REGION }}"
-        echo "Project: ${{ secrets.PROJECT_ID }}"
-
