@@ -1,4 +1,5 @@
 # Repo-Navigator-AI
+<img src="assets/Repo Navigator AI Logo.png" alt="Repo Navigator AI" />
 
 A master agent for analyzing GitHub repositories and answering architecture questions using LLMs and tool-augmented agents.
 
@@ -10,6 +11,7 @@ A master agent for analyzing GitHub repositories and answering architecture ques
 - Configurable evaluation metrics for response and tool usage matching.
 - Uses Google ADK to code multi agent system
 - Deploys the agent to Vertex AI
+- GitHub CI and CD workflows
 
 
 ## Problem & Solution
@@ -32,7 +34,6 @@ make install
 Create a `.env` file with your API keys:
 ```
 GOOGLE_API_KEY=your_google_key
-GEMINI_API_KEY=your_gemini_key
 GITHUB_TOKEN=your_github_token
 ```
 
@@ -46,13 +47,11 @@ GITHUB_TOKEN=your_github_token
 #### How to get a Google API Key
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Create or select a project.
-3. Navigate to **APIs & Services > Credentials**.
-4. Click **Create credentials** > **API key**.
+3. Create a api key in google api studio for your project https://aistudio.google.com/app/api-keys
 5. Copy the generated key and paste it as `GOOGLE_API_KEY` in your `.env` file.
-6. Enable the required APIs (e.g., Gemini, Vertex AI, or other relevant services).
+6. Enable the required APIs (e.g., Gemini, Vertex AI, or other relevant services) for your project.
 7. Keep your API key secret and never commit `.env` to source control.
 
-> **Note:** `GOOGLE_API_KEY` and `GEMINI_API_KEY` can use the same value if your Gemini access is enabled in your Google Cloud project. Set both variables to the same API key in your `.env` file.
 
 ### 3. Run tests
 ```powershell
@@ -99,9 +98,9 @@ make clean
 
 ## Testing & CI
 - Integration tests use a `FakeGithub` client (see `tests/integration/conftest.py`) for deterministic repo/file responses.
-- LLM calls are live by default; you can mock/stub for full determinism.
+- LLM calls are live 
 - Evaluation thresholds are set in `tests/integration/test_files/*/test_config.json`.
-- Retry logic for flaky network/timeout errors is in `tests/integration/retry.py`.
+
 
 ## Project Structure
 ```
@@ -117,7 +116,6 @@ Repo-Navigator-AI/
 ├── tests/
 │   ├── integration/
 │   │   ├── conftest.py
-│   │   ├── retry.py
 │   │   └── test_files/
 │   └── unit/
 ├── requirements.txt
@@ -127,7 +125,6 @@ Repo-Navigator-AI/
 
 ## Customization
 - To change evaluation thresholds, edit the relevant `test_config.json` files.
-- To mock LLM responses, add stubs in `conftest.py` or use a test agent.
 - To add new tools or sub-agents, extend `agent.py` and `sub_agents/`.
 
 ## Deployment
@@ -148,44 +145,6 @@ Pushing to the `main` branch triggers automatic deployment via GitHub Actions.
 
 ## License
 See `LICENSE` for details.
-
-## Makefile Targets
-You can use the provided Makefile to run common tasks:
-
-| Target   | Description                                 |
-|----------|---------------------------------------------|
-| install  | Create venv and install dependencies        |
-| run      | Run the ADK agent (dev)                     |
-| web      | Start the ADK web server (dev)              |
-| test     | Run all tests with coverage                 |
-| clean    | Remove the virtual environment              |
-
-### Usage (Windows PowerShell)
-```powershell
-# Install dependencies and create venv
-make install
-
-# Run the agent
-make run
-
-# Start the web server
-make web
-
-# Run tests with coverage
-make test
-
-# Remove the virtual environment
-make clean
-```
-
-### Usage (Linux/macOS)
-```bash
-make install
-make run
-make web
-make test
-make clean
-```
 
 ## Maintainer
 VandanaJn
