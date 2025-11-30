@@ -68,7 +68,7 @@
                       "function_call": {
                         "id": "adk-de8eea1f-7c8b-4ee7-af4e-79a29ed82858",
                         "args": {
-                          "agent_name": "Code_Architecture_Agent"
+                          "agent_name": "code_architecture_agent"
                         },
                         "name": "transfer_to_agent"
                       }
@@ -95,7 +95,7 @@
                 }
               },
               {
-                "author": "Code_Architecture_Agent",
+                "author": "code_architecture_agent",
                 "content": {
                   "parts": [
                     {
@@ -114,7 +114,7 @@
                 }
               },
               {
-                "author": "Code_Architecture_Agent",
+                "author": "code_architecture_agent",
                 "content": {
                   "parts": [
                     {

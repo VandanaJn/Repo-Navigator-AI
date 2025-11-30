@@ -49,7 +49,7 @@ The goal is to answer the **ORIGINAL USER QUESTION**. Follow these steps strictl
     **Constraint:** If more than 5 relevant files are identified, stop and ask the user to narrow the scope based on question and available repo information.
 
 ### STEP 3: Summarize Identified Files (Tool Use)
-1.  For each identified file path in STEP 2, you **MUST** call: **`Code_Summarizer_for_architecture`** iteratively.
+1.  For each identified file path in STEP 2, you **MUST** call: **`code_summarizer`** iteratively.
 2.  You **MUST** ensure the request argument uses the **STRICT FORMAT**:
     `<original user question> for owner:<owner> repo:<repo> githuburl:<github url with file path>`
     Example: "what is the flow for owner:VandanaJn repo:yt-channel-crawler githuburl:https://github.com/VandanaJn/yt-channel-crawler/blob/main/batch_transcribe_v3.py"
@@ -69,7 +69,7 @@ DESCRIPTION_ARCHITECTURE = "A deterministic specialist for GitHub repository ana
 
 
 architecture_summarizer_agent = LlmAgent(
-    name="Code_Architecture_Agent",
+    name="code_architecture_agent",
     model="gemini-2.5-flash-lite",
     instruction=INSTRUCTION_ARCHITECTURE,
     description=DESCRIPTION_ARCHITECTURE,

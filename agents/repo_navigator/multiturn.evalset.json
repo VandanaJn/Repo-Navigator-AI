@@ -42,7 +42,7 @@
                       "function_call": {
                         "id": "adk-fa77a312-1d5f-46e3-8041-317354afe9e6",
                         "args": {
-                          "agent_name": "Code_Architecture_Agent"
+                          "agent_name": "code_architecture_agent"
                         },
                         "name": "transfer_to_agent"
                       }
@@ -275,7 +275,7 @@
                         "args": {
                           "request": "Explain the chat flow for owner:VandanaJn repo:chatbot-backend githuburl:https://github.com/VandanaJn/chatbot-backend/blob/main/app/main.py"
                         },
-                        "name": "Code_Summarizer_for_architecture"
+                        "name": "code_summarizer"
                       }
                     }
                   ],
@@ -289,7 +289,7 @@
                     {
                       "function_response": {
                         "id": "adk-88aa18cd-0d57-4bde-94e6-29f77f2794a4",
-                        "name": "Code_Summarizer_for_architecture",
+                        "name": "code_summarizer",
                         "response": {
                           "result": "File: app/main.py\n---\nThis Python file sets up a FastAPI web server for a chatbot application.\n\n**Key Components:**\n\n*   **Initialization:**\n    *   Loads environment variables (likely for API keys).\n    *   Initializes the FastAPI app and an OpenAI client.\n    *   Defines constants for managing conversation history length (`MAX_CONVERSATION_LENGTH`) and the number of recent exchanges to use for semantic search (`RECENT_EXCHANGES_FOR_SEARCH`).\n*   **CORS Middleware:** Configured to allow requests from `http://localhost:5173`.\n*   **System Prompt:** A `SYSTEM_PROMPT` is defined, instructing the AI to act as a \"witty and compassionate spiritual guru,\" guiding seekers with wisdom from retrieved passages. It emphasizes brevity, clarity, and anchoring responses in the provided context, with occasional mentions of sources.\n*   **Data Model:** A `ChatRequest` Pydantic model is defined to handle incoming chat requests, expecting a `user_id` and `text`.\n*   **`/chat` Endpoint:**\n    1.  Receives a `ChatRequest` (user ID and their message).\n    2.  Initializes conversation history for new users.\n    3.  **Query Rewriting:** It constructs a `search_query` by:\n        *   Extracting recent user-assistant exchanges from the conversation history.\n        *   Using the OpenAI API (gpt-4o-mini) to rewrite the user's latest query, incorporating the conversation history for better context.\n    4.  **Context Retrieval:** Calls `build_context` (presumably from `app.milvus_client`) with the rewritten `search_query` to fetch relevant passages. This likely involves semantic search in a Milvus database.\n    5.  **Response Generation:**\n        *   If no context is found, a fallback reply is generated.\n        *   Otherwise, a detailed `user_message` is constructed, including the retrieved passages and the original user question, along with instructions for the AI.\n        *   The conversation history is pruned to `MAX_CONVERSATION_LENGTH`.\n        *   The OpenAI API (gpt-4o-mini) is called with the system prompt and the augmented conversation history to generate a `reply`.\n    6.  The generated `reply` and the updated conversation history are returned.\n*   **`/health` Endpoint:** A simple health check endpoint returning `{\"status\": \"ok\"}`.\n*   **Main Execution Block:** Uses `uvicorn` to run the FastAPI application when the script is executed directly.\n\n**Overall Flow:**\n\nUser sends a message -> Backend (FastAPI) receives it -> Rewrites query with conversation history -> Retrieves relevant passages (Milvus) -> Augments prompt with passages -> Generates AI response (OpenAI) -> Returns response to user.\n"
                         }

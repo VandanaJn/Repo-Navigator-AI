@@ -5,7 +5,7 @@ from repo_navigator.sub_agents.tools.githubtools import read_file_content
 @pytest.fixture
 def expected_agent_config():
     return {
-        "name": "Code_Summarizer_for_architecture",
+        "name": "code_summarizer",
         "model": "gemini-2.5-flash-lite",
         "instruction": INSTRUCTION_FILE_SUMMARIZER,
         "description": DESCRIPTION_FILE_SUMMARIZER,
