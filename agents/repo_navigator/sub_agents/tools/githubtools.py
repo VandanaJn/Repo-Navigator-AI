@@ -21,42 +21,53 @@ from urllib.parse import urlparse
 
 def extract_owner_and_repo(github_url: str) -> dict:
     """
-    Parses a GitHub URL (or path) to reliably extract the owner and repository name.
 
+    Parses a GitHub URL (or path) to reliably extract the owner and repository name.
     The function handles various formats, including full URLs, short paths, and URLs
     pointing to specific files or branches (e.g., 'blob', 'tree'). It ensures that
     the extracted owner and repo are the first two meaningful path segments.
 
     Args:
+
         github_url: The input string, which should be a GitHub URL or path.
+
                     e.g., "https://github.com/VandanaJn/yt-channel-crawler/blob/main/file.py"
 
     Returns:
+
         A dictionary with keys 'owner' and 'repo'.
+
         - If both are found: {'owner': 'owner_name', 'repo': 'repo_name'}
+
         - If only the owner is found (e.g., 'https://github.com/owner'):
+
           {'owner': 'owner_name', 'repo': None}
+
         - If parsing fails completely:
+
           {'owner': None, 'repo': None}
+
     """
     if not github_url:
         return {'owner': None, 'repo': None}
+
+    # Common GitHub keywords that appear in the second path segment but are not repository names.
+    GITHUB_KEYWORDS = r'^(issues|pulls|wiki|settings|marketplace|orgs|topics|notifications|stars|trending|gists)$'
 
     try:
         # 1. Parse the URL to get the path component
         parsed_url = urlparse(github_url)
         path = parsed_url.path.strip('/')
 
-        # Handle short forms (e.g., "owner/repo" without the domain)
+        # 2. Handle cases where the path might be in the netloc (e.g., "owner/repo" or malformed scheme)
         if not path and parsed_url.netloc:
-            # If netloc is "github.com/owner/repo" (malformed URL), path will be empty, 
-            # so we use netloc and remove the domain.
-            path = parsed_url.netloc.replace('github.com', '').strip('/')
-        
-        # 2. Split the path into segments and filter out empty strings
+             # This often happens for inputs like "github.com/owner/repo" without "http"
+             path = parsed_url.netloc.strip('/')
+
+        # 3. Split the path into segments and filter out empty strings
         segments = [segment for segment in path.split('/') if segment]
 
-        # 3. Handle domain in segments (e.g., if user pastes 'github.com/owner/repo')
+        # 4. Filter out 'github.com' if present at the start (common for malformed/short paths)
         if segments and segments[0].lower() == 'github.com':
             segments = segments[1:]
 
@@ -67,18 +78,17 @@ def extract_owner_and_repo(github_url: str) -> dict:
             owner = segments[0]
         
         if len(segments) >= 2:
-            repo = segments[1]
+            potential_repo = segments[1]
             
-            # Additional check to ensure the second segment isn't a known GitHub keyword 
-            # that might indicate an owner-only URL (e.g., 'https://github.com/owner/issues')
-            # This is a defensive check, though the segment split should handle it.
-            if repo and re.match(r'^(issues|pulls|wiki|settings|marketplace|orgs)$', repo, re.IGNORECASE):
-                repo = None # Treat this as an owner-only URL if the 'repo' name is a keyword
-
+            # Additional check: If the second segment is a known GitHub keyword, treat it as owner-only.
+            if potential_repo and not re.match(GITHUB_KEYWORDS, potential_repo, re.IGNORECASE):
+                repo = potential_repo
+            
         return {'owner': owner, 'repo': repo}
 
-    except Exception:
-        # Catch any unexpected parsing errors
+    except Exception as e:
+        # Log the exception for debugging purposes if possible, then return the failure state.
+        # print(f"Error parsing URL '{github_url}': {e}") 
         return {'owner': None, 'repo': None}
 
 def safe_get_contents(repo, path, ref, max_retries=3):
