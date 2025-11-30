@@ -2,7 +2,7 @@ name: Deploy ADK Agent to Vertex AI
 
 on:
  push:
-    branches: [main]
+    branches: [main, work]
 
 env:
   REGION: us-west1 # Your desired GCP region (e.g., us-central1)
