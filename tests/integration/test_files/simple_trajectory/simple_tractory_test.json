@@ -11,13 +11,17 @@
           "user_content": {
             "role": "user",
             "parts": [
-              { "text": "Hello" }
+              {
+                "text": "Hello"
+              }
             ]
           },
           "final_response": {
             "role": "model",
             "parts": [
-              { "text": "I can help you navigate github repositories, which github repository would you like to explore?" }
+              {
+                "text": "I can help you navigate github repositories, which github repository would you like to explore?"
+              }
             ]
           },
           "intermediate_data": {
@@ -30,7 +34,6 @@
       "session_input": null,
       "creation_timestamp": 1678886401.0
     },
-
     {
       "eval_id": "case_1",
       "conversation": [
@@ -39,13 +42,17 @@
           "user_content": {
             "role": "user",
             "parts": [
-              { "text": "How is the weather?" }
+              {
+                "text": "How is the weather?"
+              }
             ]
           },
           "final_response": {
             "role": "model",
             "parts": [
-              { "text": "I can help you navigate github repositories, which github repository would you like to explore?" }
+              {
+                "text": "I can help you navigate github repositories, which github repository would you like to explore?"
+              }
             ]
           },
           "intermediate_data": {
@@ -58,28 +65,28 @@
       "session_input": null,
       "creation_timestamp": 1678886401.0
     },
-
     {
-      "eval_id": "case_2_fixed",
+      "eval_id": "case_2",
       "conversation": [
         {
-          "invocation_id": "invocation-case-2-fixed",
+          "invocation_id": "invocation-case-2",
           "user_content": {
             "role": "user",
             "parts": [
-              { "text": "what is https://github.com/VandanaJn/chatbot-backend about" }
+              {
+                "text": "what is https://github.com/VandanaJn/chatbot-backend about"
+              }
             ]
           },
           "final_response": {
             "role": "model",
             "parts": [
               {
-                "text": "This repository appears to be a backend for a chatbot. It includes files for:\n- Core application logic (`app/main.py`, `app/index_pdf.py`)\n- PDF indexing and processing (`app/index_pdf.py`)\n- Interfacing with Milvus, a vector database, for data storage and retrieval (`app/milvus_client.py`, `app/milvus_cleanup.py`)\n- Dependency management (`requirements.txt`)\n- Basic project configuration (`.gitignore`, `LICENSE`, `README.md`)"
+                "text": "This repository appears to be a chatbot backend. Based on the file structure, it includes a main application file (`app.py`), functionality for indexing PDF documents (`pdf_indexer.py`), and integration with a Milvus vector database (`milvus_integration.py`), likely for handling and searching text embeddings."
               }
             ]
           },
           "intermediate_data": {
-
             "tool_uses": [
               {
                 "name": "extract_owner_and_repo",
@@ -104,13 +111,12 @@
             ],
             "intermediate_responses": []
           },
-          "creation_timestamp": 1678886402.0
+          "creation_timestamp": 1678886403.0
         }
       ],
       "session_input": null,
-      "creation_timestamp": 1678886402.0
+      "creation_timestamp": 1678886404.0
     },
-
     {
       "eval_id": "case_3",
       "conversation": [
@@ -119,7 +125,9 @@
           "user_content": {
             "role": "user",
             "parts": [
-              { "text": "What is https://github.com/VandanaJn about?" }
+              {
+                "text": "What is https://github.com/VandanaJn about?"
+              }
             ]
           },
           "final_response": {
