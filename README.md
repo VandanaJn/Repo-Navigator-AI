@@ -1,6 +1,6 @@
 # Repo-Navigator-AI
 
-<img src="assets/Repo Navigator AI Logo.png" alt="Repo Navigator AI" width="30%"/>
+<img src="assets/Repo Navigator AI Logo New.png" alt="Repo Navigator AI" width="30%"/>
 
 
 A master agent for analyzing GitHub repositories and answering architecture questions using LLMs and tool-augmented agents.
