@@ -82,7 +82,7 @@
             "role": "model",
             "parts": [
               {
-                "text": "This repository contains a backend service for a chatbot. The key components are: - **app.py**: A Flask web application that serves as the main entry point for the service. - **milvus_integration.py**: A module designed to connect to a Milvus vector database, which is used for vector storage and similarity search. - **pdf_indexer.py**: A module responsible for processing and indexing PDF documents to be used by the chatbot."
+                "text": "This repository contains a backend service for a chatbot. The key components are: - **app.py**: The main entry point for the service. - **milvus_integration.py**: A module designed to connect to a Milvus vector database, which is used for vector storage and similarity search."
               }
             ]
           },
