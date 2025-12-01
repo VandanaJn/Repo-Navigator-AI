@@ -54,7 +54,6 @@ class FakeRepo:
             if p == "" or p == ".":
                 return [
                     FakeItem("file", "app.py", "app.py", 512),
-                    FakeItem("file", "pdf_indexer.py", "pdf_indexer.py", 2048),
                     FakeItem("file", "milvus_integration.py", "milvus_integration.py", 1024),
                 ]
             if p == "app.py":
@@ -66,12 +65,6 @@ class FakeRepo:
                     "def home():\n    return 'Hello, World!'\n"
                 ).encode("utf-8")
                 return FakeContent("app.py", "app.py", content)
-            if p == "pdf_indexer.py":
-                content = (
-                    "# pdf_indexer.py\n"
-                    "def index_pdf(file_path):\n    pass\n"
-                ).encode("utf-8")
-                return FakeContent("pdf_indexer.py", "pdf_indexer.py", content)
             if p == "milvus_integration.py":
                 content = (
                     "# milvus_integration.py\n"
