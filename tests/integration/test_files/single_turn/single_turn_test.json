@@ -138,7 +138,7 @@
             "role": "model",
             "parts": [
               {
-                "text": "Which repository under this owner should I analyze?"
+                "text": "I need full github url, url ex: https://github.com/owner/repo"
               }
             ]
           },
