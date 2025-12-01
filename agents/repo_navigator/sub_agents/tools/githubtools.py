@@ -2,7 +2,8 @@ import os
 import time
 from github import Github, GithubException, RateLimitExceededException
 from github.ContentFile import ContentFile
-
+from dotenv import load_dotenv
+load_dotenv()
 
 def _get_github_client():
     """Lazily create and return a Github client.
@@ -12,8 +13,9 @@ def _get_github_client():
     """
     token = os.getenv("GITHUB_TOKEN")
     if not token:
+        print("⚠️ GITHUB_TOKEN not set; GitHub client not available.")
         return None
-
+    print("⚠️ GITHUB_TOKEN is set; GitHub client available.")
     return Github(token)
 
 import re
