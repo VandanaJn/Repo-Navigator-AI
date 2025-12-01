@@ -1,8 +1,12 @@
 name: Deploy ADK Agent to Vertex AI
 
 on:
- push:
-    branches: [main, work]
+  workflow_run:
+    workflows: ["Python CI"]
+    types: [completed]
+    branches:
+      - main 
+
 
 env:
   REGION: us-west1 # Your desired GCP region (e.g., us-central1)
