@@ -2,7 +2,8 @@ import os
 import time
 from github import Github, GithubException, RateLimitExceededException
 from github.ContentFile import ContentFile
-
+from dotenv import load_dotenv
+load_dotenv()
 
 def _get_github_client():
     """Lazily create and return a Github client.
@@ -12,8 +13,9 @@ def _get_github_client():
     """
     token = os.getenv("GITHUB_TOKEN")
     if not token:
+        print("⚠️ GITHUB_TOKEN not set; GitHub client not available.")
         return None
-
+    print("⚠️ GITHUB_TOKEN is set; GitHub client available.")
     return Github(token)
 
 import re
@@ -35,21 +37,20 @@ def extract_owner_and_repo(github_url: str) -> dict:
 
     Returns:
 
-        A dictionary with keys 'owner' and 'repo'.
+        A dictionary with keys 'owner' and 'repo', and a 'valid' boolean indicating if both were successfully extracted.
+        If extraction is successful, returns
 
-        - If both are found: {'owner': 'owner_name', 'repo': 'repo_name'}
+          {'valid': True, 'owner': <owner>, 'repo': <repo>}
+        If only the owner is found (e.g., 'https://github.com/owner'):
+        
+          {'valid': False, 'owner': <owner>, 'repo': None}
 
-        - If only the owner is found (e.g., 'https://github.com/owner'):
+        If extraction fails, returns
 
-          {'owner': 'owner_name', 'repo': None}
-
-        - If parsing fails completely:
-
-          {'owner': None, 'repo': None}
-
+          {'valid': False, 'owner': None, 'repo': None}
     """
     if not github_url:
-        return {'owner': None, 'repo': None}
+        return {'valid': False, 'owner': None, 'repo': None}
 
     # Common GitHub keywords that appear in the second path segment but are not repository names.
     GITHUB_KEYWORDS = r'^(issues|pulls|wiki|settings|marketplace|orgs|topics|notifications|stars|trending|gists)$'
@@ -83,13 +84,14 @@ def extract_owner_and_repo(github_url: str) -> dict:
             # Additional check: If the second segment is a known GitHub keyword, treat it as owner-only.
             if potential_repo and not re.match(GITHUB_KEYWORDS, potential_repo, re.IGNORECASE):
                 repo = potential_repo
+                return {'valid': True, 'owner': owner, 'repo': repo}
             
-        return {'owner': owner, 'repo': repo}
+        return {'valid': False, 'owner': owner, 'repo': repo}
 
     except Exception as e:
         # Log the exception for debugging purposes if possible, then return the failure state.
         # print(f"Error parsing URL '{github_url}': {e}") 
-        return {'owner': None, 'repo': None}
+        return {'valid': False, 'owner': None, 'repo': None}
 
 def safe_get_contents(repo, path, ref, max_retries=3):
     """GitHub get_contents() with short retries — LLM-safe."""

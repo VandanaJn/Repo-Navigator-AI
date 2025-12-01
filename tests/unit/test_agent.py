@@ -7,7 +7,7 @@ from repo_navigator.sub_agents.tools.githubtools import extract_owner_and_repo
 def expected_agent_config():
     return {
         "name": "repo_analysis_master",
-        "model": "gemini-2.5-flash-lite",
+        "model": "gemini-2.5-pro",
         "instruction": INSTRUCTION_ROOT,
         "description": DESCRIPTION_ROOT,
         "tools": [extract_owner_and_repo],

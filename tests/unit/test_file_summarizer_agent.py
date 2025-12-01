@@ -6,7 +6,7 @@ from repo_navigator.sub_agents.tools.githubtools import read_file_content
 def expected_agent_config():
     return {
         "name": "code_summarizer",
-        "model": "gemini-2.5-flash-lite",
+        "model": "gemini-2.5-pro",
         "instruction": INSTRUCTION_FILE_SUMMARIZER,
         "description": DESCRIPTION_FILE_SUMMARIZER,
         "tools": [read_file_content],

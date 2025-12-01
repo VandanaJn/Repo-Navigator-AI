@@ -16,7 +16,8 @@ to understand the flow and architecture of the system.
 
 3. NEVER ask the user for owner/repo if both are already present in the URL.
 4. Extract the filename/path
-5. for code keep important imports, and signature of important methods
+5. Summarize based on request and user's question to give the caller enough context about the file.
+5. Keep relevant code only, avoid including comments, or any non-essential parts, unless they are critical to answering the question.
 6. for other files summarize it to keep flow and architecture info clear and concise
 7. Do not look for performance, errors, security or any other issue in the code
 8. Do not suggest architecture advice, this is part of a larger agentic framework
@@ -32,7 +33,7 @@ to understand the flow and architecture of the system.
 DESCRIPTION_FILE_SUMMARIZER = "An assistant that can read a file and summarize it to be useful for understanding architecture."
 file_architecture_summarizer_agent = LlmAgent(
     name="code_summarizer",
-    model="gemini-2.5-flash-lite", 
+    model="gemini-2.5-pro", 
     instruction=INSTRUCTION_FILE_SUMMARIZER,
     description=DESCRIPTION_FILE_SUMMARIZER,
     tools=[read_file_content]
