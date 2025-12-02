@@ -3,8 +3,9 @@ import os
 import time
 import re
 from urllib.parse import urlparse
-from github import Github, ContentFile
+from github import Github
 from dotenv import load_dotenv
+from github import Github, GithubException, RateLimitExceededException
 
 from .utils import logger, error_response, tool_safety
 
@@ -79,19 +80,52 @@ def extract_owner_and_repo(github_url: str) -> dict:
         return error_response("Failed to parse GitHub URL.")
 
 
-# -----------------------------
-# safe_get_contents
-# -----------------------------
+            
 def safe_get_contents(repo, path, ref, max_retries=3):
-    """Safe wrapper for repo.get_contents() with retries and error handling."""
+    """GitHub get_contents() with retries ONLY for rate-limit conditions."""
     delay = 1
-    for _ in range(max_retries):
+
+    for attempt in range(max_retries):
         try:
             return repo.get_contents(path, ref=ref)
-        except Exception as e:
-            # Will be wrapped by decorator
+
+        # ------------------------------------
+        # Retry ONLY RateLimitExceededException
+        # ------------------------------------
+        except RateLimitExceededException:
+            if attempt == max_retries - 1:
+                # Final retry failed → return structured error
+                return error_response(f"Rate limited while fetching path: {path}")
+
+            print(f"⚠️ GitHub rate-limited {path}. Retrying in {delay}s...")
+            time.sleep(delay)
+            delay = min(delay * 2, 8)  # exponential backoff
+            continue
+
+        # ------------------------------------
+        # 404 → return clean structured error
+        # ------------------------------------
+        except GithubException as e:
+            if e.status == 404:
+                return {
+                    "error": (
+                        f"Path '{path}' does not exist in repo "
+                        f"'{repo.full_name}' on ref '{ref}'."
+                    )
+                }
+            # Non-404 GithubException → no retry, raise immediately
             raise e
-    return error_response(f"Rate limited while fetching path: {path}")
+
+        # ------------------------------------
+        # Any OTHER exception → no retry
+        # ------------------------------------
+        except Exception:
+            raise
+
+    # We should never reach here, but return a defensive error
+    return error_response(f"Failed to fetch path after retries: {path}")
+
+
 
 
 # -----------------------------
@@ -187,12 +221,18 @@ def read_file_content(owner: str, repo_name: str, file_path: str, branch: str = 
         return error_response("GitHub client unavailable.")
 
     repo = client.get_repo(f"{owner}/{repo_name}")
+    delay = 1
 
-    for delay in [1, 2, 4]:
+    for _ in range(3):
         try:
             file = repo.get_contents(file_path, ref=branch)
             return {"content": file.decoded_content.decode("utf-8", errors="ignore")}
-        except Exception as e:
+        except RateLimitExceededException:
+            time.sleep(delay)
+            delay = min(delay * 2, 8)
+        except GithubException as e:
+            if e.status == 404:
+                return {"error": f"Path '{file_path}' does not exist in '{owner}/{repo_name}' on '{branch}'."}
             raise e
 
-    return error_response(f"Rate limited repeatedly while fetching file: {file_path}")
+    return error_response(f"Rate limited repeatedly while fetching file: {file_path} from repository {owner}/{repo_name}.")

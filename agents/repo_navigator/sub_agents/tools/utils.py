@@ -66,24 +66,6 @@ def tool_safety(tool_name: str, *, include_traceback: bool = False):
                 if _is_error_envelope(result):
                     return result
                 return result
-            except RateLimitExceededException as e:
-                logger.warning("[%s] Rate limit hit: %s", tool_name, e)
-                details = _format_exc_details(e)
-                if not include_traceback:
-                    details.pop("traceback_snippet", None)
-                return error_response(f"{tool_name}: rate limit exceeded", details=details)
-            except GithubException as e:
-                status = getattr(e, "status", None)
-                data = getattr(e, "data", None)
-                logger.exception("[%s] GithubException: %s", tool_name, e)
-                details = _format_exc_details(e)
-                if status is not None:
-                    details["status"] = status
-                if data is not None:
-                    details["data_snippet"] = str(data)[:2000]
-                if not include_traceback:
-                    details.pop("traceback_snippet", None)
-                return error_response(f"{tool_name}: GitHub API error", details=details)
             except Exception as e:
                 logger.exception("[%s] Unexpected exception: %s", tool_name, e)
                 details = _format_exc_details(e)
@@ -101,24 +83,6 @@ def tool_safety(tool_name: str, *, include_traceback: bool = False):
                 if _is_error_envelope(result):
                     return result
                 return result
-            except RateLimitExceededException as e:
-                logger.warning("[%s] Rate limit hit: %s", tool_name, e)
-                details = _format_exc_details(e)
-                if not include_traceback:
-                    details.pop("traceback_snippet", None)
-                return error_response(f"{tool_name}: rate limit exceeded", details=details)
-            except GithubException as e:
-                status = getattr(e, "status", None)
-                data = getattr(e, "data", None)
-                logger.exception("[%s] GithubException: %s", tool_name, e)
-                details = _format_exc_details(e)
-                if status is not None:
-                    details["status"] = status
-                if data is not None:
-                    details["data_snippet"] = str(data)[:2000]
-                if not include_traceback:
-                    details.pop("traceback_snippet", None)
-                return error_response(f"{tool_name}: GitHub API error", details=details)
             except Exception as e:
                 logger.exception("[%s] Unexpected exception: %s", tool_name, e)
                 details = _format_exc_details(e)

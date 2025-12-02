@@ -1,6 +1,10 @@
-# test_utils.py
 import pytest
-from repo_navigator.sub_agents.tools.utils import tool_safety, error_response
+import functools
+import inspect
+from repo_navigator.sub_agents.tools.utils import (
+    tool_safety,
+    error_response
+)
 
 # --------------------------
 # Test error_response
@@ -46,3 +50,13 @@ async def test_tool_safety_async_function():
 
     result = await async_func()
     assert result["ok"] is True
+
+def test_tool_safety_sync_returns_error_on_awaitable():
+    @tool_safety("test_tool")
+    def sync_func():
+        async def inner():
+            return 123
+        return inner()
+    result = sync_func()
+    assert "error" in result
+    assert "internal misconfiguration" in result["error"]["message"]
