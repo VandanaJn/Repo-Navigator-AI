@@ -1,3 +1,4 @@
+import logging
 import os
 import time
 from github import Github, GithubException, RateLimitExceededException
@@ -13,6 +14,7 @@ def _get_github_client():
     """
     token = os.getenv("GITHUB_TOKEN")
     if not token:
+        logging.error("GITHUB_TOKEN not set; GitHub client not available.")
         print("⚠️ GITHUB_TOKEN not set; GitHub client not available.")
         return None
     print("⚠️ GITHUB_TOKEN is set; GitHub client available.")
@@ -89,8 +91,7 @@ def extract_owner_and_repo(github_url: str) -> dict:
         return {'valid': False, 'owner': owner, 'repo': repo}
 
     except Exception as e:
-        # Log the exception for debugging purposes if possible, then return the failure state.
-        # print(f"Error parsing URL '{github_url}': {e}") 
+        logging.exception(f"Error parsing GitHub URL '{github_url}': {e}")
         return {'valid': False, 'owner': None, 'repo': None}
 
 def safe_get_contents(repo, path, ref, max_retries=3):
@@ -105,8 +106,12 @@ def safe_get_contents(repo, path, ref, max_retries=3):
             time.sleep(delay)
             delay = min(delay * 2, 8)  # max 8s
         except GithubException as e:
+
             if e.status == 404:
-                return None
+                return {
+                "error": (f"Path '{path}' does not exist in repo "
+                f"'{repo.full_name}' on ref '{ref}'.")
+            }
             raise e
 
     return {"error": f"Rate limited while fetching: {path}"}
@@ -146,7 +151,7 @@ def get_repo_structure(
 
     client = _get_github_client()
     if client is None:
-        return {"error": "GitHub client not available in test mode or missing token"}
+        return {"error": "Cannot create GitHub client; no token available."}
 
     repo = client.get_repo(f"{owner}/{repo_name}")
     start_path = module.strip("/") if module else ""
