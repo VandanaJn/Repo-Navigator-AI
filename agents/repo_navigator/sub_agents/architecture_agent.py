@@ -1,6 +1,6 @@
 from google.adk.agents import LlmAgent
 from google.adk.tools import AgentTool
-from .tools.githubtools import get_repo_structure
+from .tools.github_tools import get_repo_structure
 from .file_summarizer_agent import file_architecture_summarizer_agent
 
 

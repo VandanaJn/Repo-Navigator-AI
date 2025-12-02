@@ -1,5 +1,5 @@
 from google.adk.agents import LlmAgent
-from .tools.githubtools import read_file_content
+from .tools.github_tools import read_file_content
 
 
 INSTRUCTION_FILE_SUMMARIZER = """

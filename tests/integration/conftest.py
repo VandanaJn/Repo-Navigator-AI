@@ -88,7 +88,7 @@ class FakeGithub:
 def patch_github_client(monkeypatch):
     # Patch _get_github_client() to return our fake client for integration tests.
     try:
-        import repo_navigator.sub_agents.tools.githubtools as gt
+        import repo_navigator.sub_agents.tools.github_tools as gt
 
         # Make the module treat our FakeContent as the ContentFile type so
         # `isinstance(..., ContentFile)` checks succeed for file responses.

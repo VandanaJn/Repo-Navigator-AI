@@ -1,6 +1,6 @@
 from google.adk.agents import LlmAgent
 from .sub_agents.architecture_agent import architecture_summarizer_agent
-from .sub_agents.tools.githubtools import extract_owner_and_repo
+from .sub_agents.tools.github_tools import extract_owner_and_repo
 
 from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner

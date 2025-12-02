@@ -1,7 +1,7 @@
 import pytest
 from repo_navigator.sub_agents.architecture_agent import architecture_summarizer_agent, INSTRUCTION_ARCHITECTURE, DESCRIPTION_ARCHITECTURE
 from repo_navigator.sub_agents.file_summarizer_agent import file_architecture_summarizer_agent
-from repo_navigator.sub_agents.tools.githubtools import get_repo_structure
+from repo_navigator.sub_agents.tools.github_tools import get_repo_structure
 from google.adk.tools import AgentTool
 @pytest.fixture
 def expected_agent_config():
