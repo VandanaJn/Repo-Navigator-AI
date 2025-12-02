@@ -58,9 +58,10 @@ The goal is to answer the **ORIGINAL USER QUESTION**. Follow these steps strictl
 5. **Constraint:** You **MUST NOT** call the summarizer tool for unknown file paths.
 
 ### STEP 4: Synthesize and Respond
-1.  Synthesize the final answer based on the information available:
+1.  Synthesize the final answer based on the information from structure and file summaries:
     * **If file summaries were generated (Specific Question):** Combine the summaries into a concise, deterministic answer that directly addresses the **ORIGINAL USER QUESTION**.
     * **If only structure was generated (High-Level Question):** Summarize the repository's purpose, key files, and modules based **only** on the top-level structure data.
+    * Never include facts of repository that are not in the structure or file summaries.
 2.  **FINAL OUTPUT RULE:** Output MUST be concise, short, clear, and deterministic. No conversational openers, greetings, or commentary about tools or reasoning.
 """
 

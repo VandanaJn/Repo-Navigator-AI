@@ -27,7 +27,8 @@ def test_safe_get_contents_404_returns_none():
 
     result = repo_navigator.sub_agents.tools.githubtools.safe_get_contents(repo, "missing.txt", "main")
 
-    assert result is None
+    assert "Path 'missing.txt' does not exist in repo" in result['error']
+    assert "on ref 'main'" in result['error']
 
 
 def test_safe_get_contents_rate_limit_retries_and_succeeds():
