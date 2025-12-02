@@ -1,7 +1,7 @@
 import pytest
 from repo_navigator.agent import root_agent, INSTRUCTION_ROOT, DESCRIPTION_ROOT
 from repo_navigator.sub_agents.architecture_agent import architecture_summarizer_agent
-from repo_navigator.sub_agents.tools.githubtools import extract_owner_and_repo
+from repo_navigator.sub_agents.tools.github_tools import extract_owner_and_repo
 
 @pytest.fixture
 def expected_agent_config():

@@ -1,6 +1,6 @@
 import pytest
 from repo_navigator.sub_agents.file_summarizer_agent import file_architecture_summarizer_agent, INSTRUCTION_FILE_SUMMARIZER, DESCRIPTION_FILE_SUMMARIZER
-from repo_navigator.sub_agents.tools.githubtools import read_file_content
+from repo_navigator.sub_agents.tools.github_tools import read_file_content
 
 @pytest.fixture
 def expected_agent_config():
