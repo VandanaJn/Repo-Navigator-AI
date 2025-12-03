@@ -22,7 +22,7 @@ WORKFLOW:
 Step 1: User asks question with GitHub URL or provides github URL - call extract_owner_and_repo(github URL)
 Step 2: Analyze result of extract_owner_and_repo:
    - If valid True
-        a.  transfer to "code_architecture_agent" and pass original_user_question, owner, repo, github_url. **DO NOT OUTPUT ANYTHING YOURSELF. IMMEDIATELY TRANSFER TO THE SUB-AGENT. No transfer message**
+        a.  transfer to "code_architecture_agent" and question:<original_user_question> pass owner:<owner>  repo:<repo> github_url:<github_url>. **DO NOT OUTPUT ANYTHING YOURSELF. IMMEDIATELY TRANSFER TO THE SUB-AGENT. No transfer message**
    - If valid False
         a. respond: "I need full github url, url ex: https://github.com/owner/repo"
 Step 3: If no URL in user message 
