@@ -4,6 +4,68 @@
   "creation_timestamp": 1678886400.0,
   "eval_cases": [
     {
+      "eval_id": "warmup_00",
+      "conversation": [
+        {
+          "invocation_id": "invocation-warmup-00",
+          "user_content": {
+            "role": "user",
+            "parts": [
+              {
+                "text": "Hello"
+              }
+            ]
+          },
+          "final_response": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "I can help you navigate github repositories, which github repository would you like to explore?"
+              }
+            ]
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886401.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886401.0
+    },
+    {
+      "eval_id": "case_1",
+      "conversation": [
+        {
+          "invocation_id": "invocation-case-1",
+          "user_content": {
+            "role": "user",
+            "parts": [
+              {
+                "text": "How is the weather?"
+              }
+            ]
+          },
+          "final_response": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "I can help you navigate github repositories, which github repository would you like to explore?"
+              }
+            ]
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886401.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886401.0
+    },
+    {
       "eval_id": "case_2",
       "conversation": [
         {
@@ -59,6 +121,44 @@
           "creation_timestamp": 1678886403.0
         }
       ]
+    },
+    {
+      "eval_id": "case_3",
+      "conversation": [
+        {
+          "invocation_id": "invocation-case-3",
+          "user_content": {
+            "role": "user",
+            "parts": [
+              {
+                "text": "What is https://github.com/VandanaJn about?"
+              }
+            ]
+          },
+          "final_response": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "I need full github url, url ex: https://github.com/owner/repo"
+              }
+            ]
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "extract_owner_and_repo",
+                "args": {
+                  "github_url": "https://github.com/VandanaJn"
+                }
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1678886403.0
+        }
+      ],
+      "session_input": null,
+      "creation_timestamp": 1678886403.0
     }
   ]
 }
