@@ -2,12 +2,13 @@ import pytest
 from repo_navigator.sub_agents.architecture_agent import architecture_summarizer_agent, INSTRUCTION_ARCHITECTURE, DESCRIPTION_ARCHITECTURE
 from repo_navigator.sub_agents.file_summarizer_agent import file_architecture_summarizer_agent
 from repo_navigator.sub_agents.tools.github_tools import get_repo_structure
+from repo_navigator.sub_agents.constants import repo_navigator_model
 from google.adk.tools import AgentTool
 @pytest.fixture
 def expected_agent_config():
     return {
         "name": "code_architecture_agent",
-        "model": "gemini-2.5-pro",
+        "model": repo_navigator_model,
         "instruction": INSTRUCTION_ARCHITECTURE,
         "description": DESCRIPTION_ARCHITECTURE,
         "tools": [get_repo_structure, AgentTool(file_architecture_summarizer_agent)],

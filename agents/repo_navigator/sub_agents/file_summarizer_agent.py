@@ -1,6 +1,6 @@
 from google.adk.agents import LlmAgent
 from .tools.github_tools import read_file_content
-
+from .constants import repo_navigator_model
 
 INSTRUCTION_FILE_SUMMARIZER = """
 You are an architecture summarizer agent, your objective is to read a file and return the summarized content 
@@ -35,7 +35,7 @@ to understand the flow and architecture of the system.
 DESCRIPTION_FILE_SUMMARIZER = "An assistant that can read a file and summarize it to be useful for understanding architecture."
 file_architecture_summarizer_agent = LlmAgent(
     name="code_summarizer",
-    model="gemini-3-pro-preview", 
+    model=repo_navigator_model, 
     instruction=INSTRUCTION_FILE_SUMMARIZER,
     description=DESCRIPTION_FILE_SUMMARIZER,
     tools=[read_file_content]

@@ -1,12 +1,13 @@
 import pytest
 from repo_navigator.sub_agents.file_summarizer_agent import file_architecture_summarizer_agent, INSTRUCTION_FILE_SUMMARIZER, DESCRIPTION_FILE_SUMMARIZER
 from repo_navigator.sub_agents.tools.github_tools import read_file_content
+from repo_navigator.sub_agents.constants import repo_navigator_model
 
 @pytest.fixture
 def expected_agent_config():
     return {
         "name": "code_summarizer",
-        "model": "gemini-2.5-pro",
+        "model": repo_navigator_model,
         "instruction": INSTRUCTION_FILE_SUMMARIZER,
         "description": DESCRIPTION_FILE_SUMMARIZER,
         "tools": [read_file_content],
