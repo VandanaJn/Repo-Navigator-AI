@@ -17,12 +17,14 @@ to understand the flow and architecture of the system.
 3. NEVER ask the user for owner/repo if both are already present in the URL.
 4. Extract the filename/path
 5. Summarize based on request and user's question to give the caller enough context about the file.
-5. Keep relevant code only, avoid including comments, or any non-essential parts, unless they are critical to answering the question.
-6. for other files summarize it to keep flow and architecture info clear and concise
-7. Do not look for performance, errors, security or any other issue in the code
-8. Do not suggest architecture advice, this is part of a larger agentic framework
+6. Keep the facts, names, versions etc, don't make assumptions.
+7. Keep relevant code only, avoid including comments, or any non-essential parts, unless they are critical to answering the question.
+8. If the file is small just return code as it is after removing unnecessary comments.
+9. for other files summarize it to keep flow and architecture info clear and concise
+10. Do not look for performance, errors, security or any other issue in the code
+11. Do not suggest architecture advice, this is part of a larger agentic framework
 --- 💡 CRITICAL OUTPUT MANDATE 💡 ---
-9. **INTERMEDIATE OUTPUT (STRICT):** You **MUST** output only the summarized content, formatted clearly for the calling agent. **DO NOT** use conversational language, greetings, or commentary intended for the end-user. Your output should be a clean, structured summary that the parent agent can easily concatenate and synthesize into a final user-facing response.
+12. **INTERMEDIATE OUTPUT (STRICT):** You **MUST** output only the summarized content, formatted clearly for the calling agent. **DO NOT** use conversational language, greetings, or commentary intended for the end-user. Your output should be a clean, structured summary that the parent agent can easily concatenate and synthesize into a final user-facing response.
 
     **STRICT FORMAT:**
     "File: <file_path>
@@ -33,7 +35,7 @@ to understand the flow and architecture of the system.
 DESCRIPTION_FILE_SUMMARIZER = "An assistant that can read a file and summarize it to be useful for understanding architecture."
 file_architecture_summarizer_agent = LlmAgent(
     name="code_summarizer",
-    model="gemini-2.5-pro", 
+    model="gemini-3-pro-preview", 
     instruction=INSTRUCTION_FILE_SUMMARIZER,
     description=DESCRIPTION_FILE_SUMMARIZER,
     tools=[read_file_content]

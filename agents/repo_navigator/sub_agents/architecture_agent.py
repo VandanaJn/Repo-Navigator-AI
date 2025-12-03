@@ -71,7 +71,7 @@ DESCRIPTION_ARCHITECTURE = "A deterministic specialist for GitHub repository ana
 
 architecture_summarizer_agent = LlmAgent(
     name="code_architecture_agent",
-    model="gemini-2.5-pro",
+    model="gemini-3-pro-preview",
     instruction=INSTRUCTION_ARCHITECTURE,
     description=DESCRIPTION_ARCHITECTURE,
     tools=[get_repo_structure, AgentTool(file_architecture_summarizer_agent)],

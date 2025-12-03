@@ -36,7 +36,7 @@ AGENT_NAME_ROOT = "repo_analysis_master"
 
 root_agent = LlmAgent(
     name=AGENT_NAME_ROOT,
-    model="gemini-2.5-pro",
+    model="gemini-3-pro-preview",
     instruction=INSTRUCTION_ROOT,
     description=DESCRIPTION_ROOT,
     tools=[extract_owner_and_repo],
