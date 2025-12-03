@@ -1,0 +1,423 @@
+{
+  "eval_set_id": "hallucination_found_during_demo",
+  "name": "hallucination_found_during_demo",
+  "eval_cases": [
+    {
+      "eval_id": "case1",
+      "conversation": [
+        {
+          "invocation_id": "e-30f82006-a566-403a-b5ac-26112341c41e",
+          "user_content": {
+            "parts": [
+              {
+                "text": "what is the model root agent is using in https://github.com/VandanaJn/Repo-Navigator-AI"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "The root agent is defined in `agents/repo_navigator/agent.py` and uses the model `repo_navigator_model`. This model is specified in `agents/repo_navigator/sub_agents/constants.py` as \"gemini-2.5-pro\".",
+                "thought_signature": "CuQIAXLI2nzFBx0h-396btYCxYOi7TxXtSrEYA2YsuXlOd48bv7JBTDayUcRdDx7mwoqNKhWXnmUiGNmSfh5TigJcenQK-M1o_a7baEmhe2shCzrFnwWxDSitAiAmFYNVxELCjytZKFMypbk9abh585RiaSPOAFDFfeH7MqAIRlZB9L_L4Th8IJa6fzYKCWYpuf57bz_WXacul4qFbDwA68BfqNPO9lgptPOoWDBkHJi1H4RUAN7CrHnMaueMaTzKDGTME2Lvt25vszJbpZe1ERCCJAZkJHOxSkEev4GJUrIXWeCIK0ygWT5ajw06_bHQlnRYI02By2WKu8_2wyW6Yi9CuHuFjzqoRFlX8kWsb1GZahXMdo_MG1f-Qqyrj2QcE6fp5fLcmTDa_6U15yZdDNyzCj-yFgfOdAcPe63N5Qt3zkQSVBzf1uB-RZ6uC59SdA0Sx2r-a5dCeblf2VtuB4Q4fUwqOPGkjLc9YQIcI3pfkzV0UihhL5vHc3cFMzR6X_6uZy6f_VTPq9Q4CqahYT10rvFYyffInARC3ZhOBBrdmA-HpscTRtsT3Hy1WJoV9K2q0H3pphc7HKO35cYVMtJ-iyls_-z1DbIBZTl98ZIYiWB0E542RzJ1OclCCrkemQ3WCAhbbjENZKNld3W9D60fs6JUIiaY1qvXOfsF3a_v2AmcKeIlEeoVJG4jq-FyhHPJGCs_R0Rk65G5GEYEhD5nFvyF52eY2VAFTPIwSIKJN0O14GXziVYeugOy7VDePOHzq0x3vC0GeJ5QXZhCCTF-tQ6cXjl-PfYlxe8mqH7WXijmCcX5JMqGPr8uVW6EQ26n1zdt1dCLkIoxm1ouB_nYAYNhcRGM9WpzV9DPi6l5QIOvV1p0tEKTwhs4GO4U7QVeiq9ywMnrTe_9TWdr_gttchijBwEHfD6vwIpRYU1LWmFyajxrkzp_ov8C7BtjxSgZRCDkfR-TQRjmCbuP26GqEv_nOUH3JnEmGUKx_4Z0jfae3MvLBuOtTh03566WvfILHd5aWnR1BsC6aIHausICLK9FeoLqH5-4AVQ6L4gmAY0vVO9XjVkdpoTcQSPBJyMacsy4t7Y_N8mG9E8DDRhbaRxsv8yEkxA4Qbb9B7DcmZ2O__D-2EduTe0cdkGNRC9PgJ9CuDkk5UMm3a9O3Xm0rxhKktIzYJ76kimTGcGMABCKmHA43SnbWBjJ9rWP6V2IZBDJvRdLe36iLd9Y3XsN7GJkfHNPz58c53sw3f8vldWy3uXS3zPgR-vPYMwhHmb6IWG-XahP5HcmdkDjVQ1OmJP4ANfn8nvQzGjA-Dgau6g_spf7pXSTTZ2J3mtMHFs3if3T2CzYB7iVi2tMHaFb_uHSNrXkg5lkKLKMRgiL04CTY7_MA-hIL8jeQuCpsyHDY29N1B9Ku8Lt9M2I5OYNE8l21eG_iQ94opz68rcUfvCblCqsHCwImmxPw9MeKbDOUOVbW8dYhTaCnpYRZ83LtbWnO8="
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "repo_analysis_master",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-5837bcd4-d0f5-4050-a4e6-242475d3491b",
+                        "args": {
+                          "github_url": "https://github.com/VandanaJn/Repo-Navigator-AI"
+                        },
+                        "name": "extract_owner_and_repo"
+                      },
+                      "thought_signature": "CsQLAXLI2nymdruwWp-QcnPyYdqmGWF0v59G2cBsj2O357F8Cw6OiD_sBjcQrmhj6OhYqyL-vCPm_ndYkT9U653m0ECmvvysPv2HxNe1hjzPLMkhPN7Amq5ptzyOEfR3r1LZDR7fH3-cC3V5rRKcKipaYi-39OxCAdygkz6JV_AP0sYq9n7DxvaFzSqN8ZqE4t_azXVc10Cl_-3wtcYjcMURHxaM1xCojIxHRhCM6sQzsFQOfA_6I1wSmJT5p9D1JV8e2I_tD_6ad3ALTQeYrrroKhBXkecZ5UsAUZ-LOlzUA8xeGrXqAJg_dRrkNUrqAB5TK3fmGmgM1YbKgqw7UzviMi8Uc6ZWwgNvzDF8EVBV0UR-Q-GeTUtxBMsR9HGclaCoc8GHoh7_PIUA9X-E73CiedkHPQpkPM99pIRE_Gwq-_ueBOLLCo4lKk2MRgcvdsq3xcJ828CatEzq806hCyzf6nbED_TkwomQifcO0GtJ-aebHRwG6Ty6Vy_sf1_rsshBg4EYw57FuX_DVKVVJdF99luosfCI6wBFvn5uTJf_Sl4uVAft37be0LxLsoxOc7efZxkixDyp7A6YE3Qhk-feTrTuznzcU2ctYPgOlzX1N1dgRhXht6CyuMmVzmaRFzcP5TWzNESWi4PUiXDEMIhbeJ0uiNhcn7LSJa2nivnDxOx1PpSheRwxonifAQZkej51pP432oL2diqAlsQZGGg8YxCkmXRI6lNeVTDySXCt90M93_tKQw2IkuBG55X7AOWUM6VquVtrwA7ofMDXesE-vdLVl1yo7VU01Qm9ezJg6JoeyimYyy4IMZw3O2rgVf9A72PNGNZpx9idW85E4ADXmfEaat-sFAo5D6bs59Urh4EyrH7FpOVg0RJEDeXITuwwin71fTNJekYf9N8S2joyspTqkIykboiUprNSA3nrwRmbHe7RZAZBQCHarvdUru0I6QAjz2Dl0ttj4vSxaii9EHRlFDH8hPsGtJuNuAegz8sAMSBJSiTLpaiNo6KsclQvt8elmJAoVUUeSEnxMAWr9AHfTk3nWw5dLoTrbA1M9iSgSdTsp6jZvUK7gigphNn4U0-LLk98KsHCKEGxwdeu6WvDqYk15SzLUANex8hIVIj4SBaOpXqR8sldKIu6WlSt3YPwqGZ2mcoSwwTI3eL6stRZzG2ZhBOkqQe0UJ-O-P_cCmN6h6dUOotga5TAe799NBsrAA7dIiFuruN1Na81Sw7pSJtryobIchj6ICE1fFUjTU91vtRe7hvgDilHOqRQ-RYyCNev6Hh3UuJv0t4s_L5aY5Badn3aXY5SV-5ao7N4YUCRVb5Br1JG7YoTX_VnxzSuAK0pf4v-adtgddM_G133KXNhDomDxQyODV4Jm3yG1WEAeab_dnVWAcrzYmt2Ntwsab32JeGESP4HLJ5ktcs4DUO4OQVaRCB7TjCdmdElGvP9d_GwLyomuvo2R8Gbk3E1oBkCH8sRYWNrYl_YVFHSif42QHtlXXRyLwjmjP3zIcGgMKP4cKtLWqR5Mc2jE0wv5BRhBrznOG9C6sBbUTp3wUhI8aMNBgGSSEyCYkA-kYCoCCrZfLg9TbufX9Qi_zhNjSXB1oclV80JeacGFqsA9KZJI5AaqlFXciVKn1hC4QHoTm4qI2zSiNYu5ISmcxA1jdANIllE3LUr9eDoEhWLCieyU_vstIBdjzKY9jkHelMxkRjctl8wi_2XFPQ7983eSpEEX6i1fVkC8uWGy3jdAeZgVxH0WsE2vRYcdD1KLmewjr9DOi4EQpFmSm2NIX0Rg37864DS85vI-Do39_7kwAW71uE5NBB90zQwptmNCM94gsGtSm8VbIVQ0-f8ESftvYYTtXU2acBaIq0dC3qbD2KPjf2STLRAwLYzsIVOGNQpD3lbaWVwHx7UtIQ6omYzbsXjPAasSny3z7ozNRuM310ZqHldxmZ-CUIpJ1V9cwv5"
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "repo_analysis_master",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-5837bcd4-d0f5-4050-a4e6-242475d3491b",
+                        "name": "extract_owner_and_repo",
+                        "response": {
+                          "valid": true,
+                          "owner": "VandanaJn",
+                          "repo": "Repo-Navigator-AI"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "repo_analysis_master",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-6290f6c5-b3f6-4b6b-a6e3-5b403c155f94",
+                        "args": {
+                          "question": "what is the model root agent is using in https://github.com/VandanaJn/Repo-Navigator-AI",
+                          "github_url": "https://github.com/VandanaJn/Repo-Navigator-AI",
+                          "repo": "Repo-Navigator-AI",
+                          "agent_name": "code_architecture_agent",
+                          "owner": "VandanaJn"
+                        },
+                        "name": "transfer_to_agent"
+                      },
+                      "thought_signature": "CpEIAXLI2nzJF3VHgVFD6FyptIabLOoMmTFdYlfldmaf6Sxru15owo-JzMc82jxfN2sW0T947pL_7kmbMC13ygxJuq-8mPp1wM-HcqL-kz-1zxUy69BX66kesFz4YKcCyyY5E5ZgYO7NQPbzp5koIpgatsPKmnwg17y1aYoom0PCoYZq4saxzQOHOdBGeM75awJQGJC264EklqsSdnrv7tmdOONd7EY2O0vvhQkGrA11TTtvVw7DHwBfci5SHHDoadlDskzqhvICfQZrvMcj2A0qj0CE-oNJN1FY8Bhywn9R9Diq7pOf2lhXl7ftoQnMYxNzphr4rG_Br7hLY1FqsCTGHv7iIx7ynbFH0-Ow2TdGtZDHU_shWfTE_u7rKQQ99FHlM-DEVvvkkFMfuXgQA48MhFmRpD0Qr5mYK8qBDHjN2jT2WY6WdEiUfHCqaMPK99u5pIbl5hD-DUxP8MneOoQCkDSjlK4cjfmzK0BdpieYoM-RKB0heuLNpkfzrkdpXCZW8Qd1VY76p81haQm0ak4rZOzchXuBciCeReqPUbF0tSiQxrYGg4_usbU0htV-qzdp6CoDyZHSWDure0oWjF2a6DYJYdZC0I4CSkeJTkCyLuW_HnQuEYzgsjYaW0Jk08860EES87CR53pG7ZnY8A_DgpW3i6BluaKO4Nngx2tUodfb6R-UE4Wp_vyTk3o1Z-OArVnH1js-o-ppwsrTa87dxjYN2uwMaBK8ScetdalH71gYzHm22rGs4-tozpAvxm0-QX6QsSMbmcYRAVkhmdLizyyevyg484hfC8JDieU7fXlRb-w7o_AhyvrlSFUKpftqtN9q1gr7_BkM5vJq8WPMDdam2SrdNybKWQL7h1YNetcIufKxQ6M36tizK7SkRftqVsOwPnAuWyiA1L6qupnM4qdPaoNRVFde7iI2W56kd6MLEH5yaRifodqjh6AajdA7aTTk6kgHX4S_fKWNbxrQszsZRer5wONUXun4yMqElAM2JH6oJpvu7yRHUGjdYjthdpdDMhRdWNERnr1ewlqNsxvD7kiJrgrsYgsf1K258F_8qtKxKaOiK_95h8jIvlaS3vwkGsaPTP_uq2zqAMrr9Gd4k2g2TgjZk0-EVGn28y9qctSPR-ay858q1srRakK2VfI422Hfr5g2bvoN2PO95e2hNGGL1i3LAbNNuo0LX199eGNKooU15AQFmro7n_g8rzqRfqkCEp2c591mMfWVSNAOyyX9CcOJm8tp9NtHmg81o_bMs0p8ulO_p7EFDPQepXClbF50MvyY8H2wlPjl9JAL67vcgq-kQOKf4R01qnSEyq1zQ2jNK1plmJ3mvNWgHZOWSe2QxaoIWREi9DjNt-kGD1kdjEhV91jk8epN3Jhr"
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "repo_analysis_master",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-6290f6c5-b3f6-4b6b-a6e3-5b403c155f94",
+                        "name": "transfer_to_agent",
+                        "response": {
+                          "result": null
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "code_architecture_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-8cefc5c2-28e4-4173-9480-0471b0c8d45b",
+                        "args": {
+                          "max_depth": 2,
+                          "repo_name": "Repo-Navigator-AI",
+                          "owner": "VandanaJn"
+                        },
+                        "name": "get_repo_structure"
+                      },
+                      "thought_signature": "CukIAXLI2nz4jHlWOrE-ov_WjXtBeJbxynzSX3tpYBe4Odjo1Q-rLzl7g6B10PO3OMgLefuxyQf0OXxGO_I3vzQCzATf4OrD3JgPsBN6FNFkN2_xIj7tMzku42dluM4gk5JExD7mBMVwPaBxnWbq6a6t5tUTVKH95142CRw-Tx1fDRAciM3qoqCR2syCYcqtOVBg2Cs1oIiBuSYbO-4qS8fRfYF-u_wPzVDTZdeJvskEtuI4QXXd4eCRmCnmQQaitRVQ9UCzoNT2Uqjgm_i5opMsWxquEcyHc4cvbdIEAbWBelTkXW4qDKRj2Y7aFKOqNxLxJua0McY8RAr5Q89ErTCnqyF-R-lg7s2eAxrJq7cRAFlZu6TIK1eZHlCy2X7QMmvNjtvUKKlTMt_BKuMcHwr7rIgF3LH_3NfMvM8asQlbpVAGkD093MDytk-X-9THqwP366Y3LCIhV9GYQW7KBHwjR2cluxGi-75v8V8C7QhwChppWub1wJI99ALZPIxM0S0EHvgxWtTY6FeGGCdas40o-tl9Iggo-Pwc1tGRaLzRvAn8ASLhpJiuTJFf5JCASXdaIWyBFOXZXoQcTiDfEAU-FFQo9Y2M10X3yC6K0pzMPIHq79BYsXq51Ay5U9FYnKA6hB05U9CWg0PG4_gtSQdoAvOTr3OiAB-uabPEtu7KFWm44P_2GLTL9VtMK2aanhm_QllgOWvPDUAa9YwVnGCwrhHzDciVIwxMQsNX1JWRx2rRoSP-6xvGZU0nwdBkymqeFOr4y9TdTNkmldCquglUMzirdh1c1D6w_2DwoRbRN4yazAm5ExTSHD8--pWEX14qnUNtBk_6x0KUvqsLppy8mE_eGgxsF2ZNepJY6FCBG74a00ytef_8PVHo30gfqJbsYz_nuJNRu0OpYW0YbcFHSgoU4fydyHBVTndGqW_eFLdx1IFAb7R23Z2QdfdMr8VsSRn5JyRlgnaO2Y31YS7TRwcI6TtTsqHsffzpOLK6RjZjf3USF-qFyTwv69IpYyatRuYHgOm-PmWbDZ4ybTBGK_TKqfBjeIaljZ0jw5O_M0ax8tmXf4OjNaykn2QhykL0_Q3vV4OdXlhoRWB185f4ossrXWUV0lx1q84yQi40jBa18a26iaRo2etE1l1zpoLuwxzmrpoYZ9Hd6v7IMU4ymHlMTsC46yPwGI550wVkgFcn4Wfk_ce1piv1XBpLs9OJKp40SIx8WDsF9nj42I29YNpXGpU4Zbrajz7F2d1GOXF8tVPU-BCLRfXMBtvCkNhfUMxud8g45ALa1VfHZhhEwgEfPuDF7pvnwlHYBFuD81SRegwW2qgyZjacPXcCv4vWL-TZNPHqYLi-cG77F-LqHeRk1biafCRbbxX5yZjmdixn05-SDJneiPSYT0E1TL0fHyCcPp3ba2qAmsltaNsI_YnA4KQWLO5pCxI2IlOUeVJ76qAEAF9B2PWCkRVbK3xOl-tQSeGbd81X4lnSONga41pZY1N_uraM9w=="
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "code_architecture_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-8cefc5c2-28e4-4173-9480-0471b0c8d45b",
+                        "name": "get_repo_structure",
+                        "response": {
+                          ".coveragerc": {
+                            "type": "file",
+                            "path": ".coveragerc",
+                            "size": 44
+                          },
+                          ".envexample": {
+                            "type": "file",
+                            "path": ".envexample",
+                            "size": 29
+                          },
+                          ".github": {
+                            "workflows": {
+                              "_truncated": true
+                            }
+                          },
+                          ".gitignore": {
+                            "type": "file",
+                            "path": ".gitignore",
+                            "size": 5059
+                          },
+                          ".vscode": {
+                            "settings.json": {
+                              "type": "file",
+                              "path": ".vscode/settings.json",
+                              "size": 296
+                            }
+                          },
+                          "LICENSE": {
+                            "type": "file",
+                            "path": "LICENSE",
+                            "size": 1066
+                          },
+                          "Makefile": {
+                            "type": "file",
+                            "path": "Makefile",
+                            "size": 2431
+                          },
+                          "README.md": {
+                            "type": "file",
+                            "path": "README.md",
+                            "size": 5038
+                          },
+                          "agents": {
+                            "__init__.py": {
+                              "type": "file",
+                              "path": "agents/__init__.py",
+                              "size": 0
+                            },
+                            "repo_navigator": {
+                              "_truncated": true
+                            }
+                          },
+                          "assets": {
+                            "Repo Navigator AI Architecture.png": {
+                              "type": "file",
+                              "path": "assets/Repo Navigator AI Architecture.png",
+                              "size": 245797
+                            },
+                            "Repo Navigator AI Logo New.png": {
+                              "type": "file",
+                              "path": "assets/Repo Navigator AI Logo New.png",
+                              "size": 19470
+                            }
+                          },
+                          "documentation": {
+                            "Repo Navigator Agent AI.excalidraw": {
+                              "type": "file",
+                              "path": "documentation/Repo Navigator Agent AI.excalidraw",
+                              "size": 47210
+                            }
+                          },
+                          "pytest.ini": {
+                            "type": "file",
+                            "path": "pytest.ini",
+                            "size": 42
+                          },
+                          "requirements.txt": {
+                            "type": "file",
+                            "path": "requirements.txt",
+                            "size": 129
+                          },
+                          "tests": {
+                            "integration": {
+                              "_truncated": true
+                            },
+                            "unit": {
+                              "_truncated": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "code_architecture_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-00146a2e-9b3c-4d2e-9094-4aab0c65cfb0",
+                        "args": {
+                          "max_depth": 2,
+                          "module": "agents/repo_navigator",
+                          "owner": "VandanaJn",
+                          "repo_name": "Repo-Navigator-AI"
+                        },
+                        "name": "get_repo_structure"
+                      },
+                      "thought_signature": "CtIEAXLI2nwSI79YLaiAHoceksZqyoVOZzttIGZ2Pcw6rVcodK7mVW_irT0dp6C5QG5KRGZg8RsaHP780e6O31JcueObBbXKX9V_gSZVaQsGQwpmWXRPOUcjzCgUaA1X1qE7V-NSA_bFNCE-sGACUHdhrDJez0_qA5awurySzqLl6ILTCRSGlQP0S7cYyBCMvPOXZ_namCAN_1FqSYgYY52c6bzXo5X2iipx1PEwTGkpwfpN0CEjP6hSUZVjw4QHIDFqwEzSiAm-dbJKgd9EHncYbfcC28I2kKa8KAdWi6K9j3n6XH6BhU9odd_XRDoUpIKKUFxQz4MvFeKW9KBQrNE_MGgE3GLiZLDH1UXO9bQYGRN43rsUOgh3Gy6k-8RWLDTnVekJCPgpL90bppGcL3MLcQaQsMeXGVVdnT54yXthHANo1e2yMNtBproRshB4nMKAg3XQnH7a3HQpjk0fRH3_yLJkW1HbavH7WWuXM6rpDG57EBjtOI9twjzS7c6qyxBZCJFgzwKUsJKuqYbAQTQ_ot2mcMr61dsuZ3WV2_p9eICh3eGjKXezh-Ij_rE-Hsu33XJ8HnVocCGHEVsAmSO8C9yWOUIwpHpczt6dgjqWFRHY79Wk8vYT6tyZkQ9xAUZJqal5SzwkVhD7y9zC1AkD1ImXMEFbwVKorn0heMVDeCOUMHW3UJyxAG5mNB6kUxPofH2xsbQTPP9qwOAAG-iYLGmW0Vz9vHfwhOmBNbBgeDyKllAWKH0803dShl3IXHMEPUyjsF5aCuutf-spqf3E9TDq"
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "code_architecture_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-00146a2e-9b3c-4d2e-9094-4aab0c65cfb0",
+                        "name": "get_repo_structure",
+                        "response": {
+                          ".agent_engine_config.json": {
+                            "type": "file",
+                            "path": "agents/repo_navigator/.agent_engine_config.json",
+                            "size": 175
+                          },
+                          ".envexample": {
+                            "type": "file",
+                            "path": "agents/repo_navigator/.envexample",
+                            "size": 55
+                          },
+                          "__init__.py": {
+                            "type": "file",
+                            "path": "agents/repo_navigator/__init__.py",
+                            "size": 30
+                          },
+                          "agent.py": {
+                            "type": "file",
+                            "path": "agents/repo_navigator/agent.py",
+                            "size": 2566
+                          },
+                          "multiturn.evalset.json": {
+                            "type": "file",
+                            "path": "agents/repo_navigator/multiturn.evalset.json",
+                            "size": 18731
+                          },
+                          "requirements.txt": {
+                            "type": "file",
+                            "path": "agents/repo_navigator/requirements.txt",
+                            "size": 59
+                          },
+                          "sub_agents": {
+                            "__init__.py": {
+                              "type": "file",
+                              "path": "agents/repo_navigator/sub_agents/__init__.py",
+                              "size": 134
+                            },
+                            "architecture_agent.py": {
+                              "type": "file",
+                              "path": "agents/repo_navigator/sub_agents/architecture_agent.py",
+                              "size": 5480
+                            },
+                            "constants.py": {
+                              "type": "file",
+                              "path": "agents/repo_navigator/sub_agents/constants.py",
+                              "size": 87
+                            },
+                            "file_summarizer_agent.py": {
+                              "type": "file",
+                              "path": "agents/repo_navigator/sub_agents/file_summarizer_agent.py",
+                              "size": 2325
+                            },
+                            "tools": {
+                              "_truncated": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "code_architecture_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-5cbee950-1b25-4210-9c71-737833bc5f3c",
+                        "args": {
+                          "request": "what is the model root agent is using for owner:VandanaJn repo:Repo-Navigator-AI githuburl:https://github.com/VandanaJn/Repo-Navigator-AI/blob/main/agents/repo_navigator/agent.py"
+                        },
+                        "name": "code_summarizer"
+                      },
+                      "thought_signature": "CvkDAXLI2nySmon1YBavlV91L3nkKNS39yIcPruovu_CkBETWl0soUbvNnfvi5MfvkS7g-siuOvupgyQX8GGqL9HbDkFwkZFHU_gEkbO6dpwCRmdzBIKOxZiWIeAvNOEzdaXAF9nQWYQHv9lFAgEoxOC-U_pqRm4kTj8Li9pqxHrooLTLjHxCZu39uHLiyb-OT4pUFUT9J8RGgsyU-xUz-us3qOOCpgHDpAPa0rq260gVXHhMqjjZ-lomQNAkoWm7dpohs3R7nK9XwM_zBUyT8G7kQbtth7g8J9bYL5D-mc6ybbkI5TBXQDU7FR0jeKpwtlUOcENf6RKGWg-dRMls1-K0DD32kxIiEvq6FfMWlrTjE9poz6kjF6CV93y7YeoZNzdFytgyb0Y_TuSq90wJXLQmxSysnRG0w67HeMORVT_ysdML5pmYthoQWaTgXUhPd9YgPRhpaSqlC9AhLToXu20YXyP3hZY25QDOskgoR0RMtiUM4I1mJimeqQqKpJ1OA4vcZfxpP2NoDX0vUyKl9YT-jWQpyJsABLaVHWnG5Dhl9sxV81WDPwYfy5Zw6IaXCVNG2lmy1JFc1JPvES1jhz_utXB3CzrZMfx3RYfz1eVQaLpczOLHMI2ke3LVTlpNm9jXH-Q9Wjk8iRoNEvuL3I_18AHcT4p0Pkp1w=="
+                    },
+                    {
+                      "function_call": {
+                        "id": "adk-b33a2f14-174d-4f45-a99a-e2f798502cd0",
+                        "args": {
+                          "request": "what is the model root agent is using for owner:VandanaJn repo:Repo-Navigator-AI githuburl:httpshttps://github.com/VandanaJn/Repo-Navigator-AI/blob/main/agents/repo_navigator/.agent_engine_config.json"
+                        },
+                        "name": "code_summarizer"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "code_architecture_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-5cbee950-1b25-4210-9c71-737833bc5f3c",
+                        "name": "code_summarizer",
+                        "response": {
+                          "result": "File: agents/repo_navigator/agent.py\n---\nThis file defines the main routing agent for the GitHub analysis application. This `root_agent` is responsible for extracting the owner and repository from a GitHub URL and then delegating the user's questions to a sub-agent named `architecture_summarizer_agent`.\n\nThe `root_agent` uses a model named `repo_navigator_model` which is imported from the constants file.\n\n\n```python\nfrom .sub_agents.constants import repo_navigator_model\n\n# ...\n\nroot_agent = LlmAgent(\n    name=AGENT_NAME_ROOT,\n    model=repo_navigator_model,\n    instruction=INSTRUCTION_ROOT,\n    description=DESCRIPTION_ROOT,\n    tools=[extract_owner_and_repo],\n    sub_agents=[architecture_summarizer_agent],\n    )\n```"
+                        }
+                      }
+                    },
+                    {
+                      "function_response": {
+                        "id": "adk-b33a2f14-174d-4f45-a99a-e2f798502cd0",
+                        "name": "code_summarizer",
+                        "response": {
+                          "result": "File: agents/repo_navigator/.agent_engine_config.json\n---\nThis configuration file specifies the runtime settings for the `repo_navigator` agent. It defines the scaling parameters (`min_instances`: 0, `max_instances`: 1), resource allocation (`cpu`: \"1\", `memory`: \"1Gi\"), and required environment variables (`GITHUB_TOKEN`). The file does not contain information about the model used by the agent."
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "code_architecture_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-91c6c120-f668-4b30-90c2-5d936711d106",
+                        "args": {
+                          "request": "what is the model root agent is using for owner:VandanaJn repo:Repo-Navigator-AI githuburl:https://github.com/VandanaJn/Repo-Navigator-AI/blob/main/agents/repo_navigator/sub_agents/constants.py"
+                        },
+                        "name": "code_summarizer"
+                      },
+                      "thought_signature": "Cq0GAXLI2nybFoDDlCjWh3RNY1R0Z7aUJpIb-E6orEalmC8mwovqyIoQL-e7XB-KgUo5mCkbZpaNlCLwb4T7CAFoq3riZqYhnkEpuQJP-DdaZdXL6gFj4dRyK7ZIay6IOnarjjdpY36RMGh9j4ipcfF_KaQo8VoQK4WuCTEe9cWoUJ4wrirRj33wZh_eDrFay1o4JXwA4I1dUQIyLRTNqjzTt-htsgVVjkXYZGdbi3wP8DTceguL0Eu-KFSaGWpQkrDprzJM4HwCd_6J3fqpa8V7OR_JM8yCk33yasEG3jhhF8jtxnIaLR9tuEGzK6e2LQlBBKJsTRMWj4xof58BcKIe9gpaS-2cNTvZpSfxws0onJocdDNMtGv8j6ox2qGzO4YXqb1CyQgOwbn-z7-F7lcx_uQoSUAGZ-f2tanHIQVHcGLH2XAJLNYBWoClK5cP31HIw3XfehVCnHYtcHFYtbXep0KxJX1yuDJSp4cnChNwtHRgnZmauY4ZL2KjNhzurbkB9mZP1zBOqw4KEuq-eSGcNvya4wTylLe4JA7e2TRWcPzGon93VQKrpowEvMXhP3Iz-zouOioLaO4DmvuuIwMWZmUEEyriRWLy40Ck7byLHpYX36fDZqPPIVpxyxgJM3GXv2dRhjYl1UEQEtq_Z3WJRNHXXkYh5UJ4O8TQxWFH3xf4zW2R_qS4-5tfAfegvgQhxUIiHCPn4zHLRWK0UIpPM3uC_Y4zwwP45VtlHSOUCzH8o42VLKpKp7IDY-3bUpxdVdToIyQHjFW196NSQdylWkWmpYD0isN0bRcCmLtQXny2pQ_I_LWj3cqb-N2htjmL7BNTqe4JuTcf4OxOpQLFZG05BqlYTeyT5JsT-uCfNer4Epbip8Xyp1XpqORxqHBA7UgSk7XwCdo1Xe8OFupU_BBP5x9wyHbLCRMcbyK89ByD4AHtVw3CtYPHHnbVNZAKTExDVBwOTiRJ1H8aJ4CPfjRPy4DDYRjeFO2CcL6sIAs6kdpVprMlCOteW-0anH9ovsqcrR0MZ4jV0JM1G_mx3lAnzRmaXJGzatRIilP5y0s_ljfUm5yC3ZJ6_F8B"
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "code_architecture_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-91c6c120-f668-4b30-90c2-5d936711d106",
+                        "name": "code_summarizer",
+                        "response": {
+                          "result": "File: agents/repo_navigator/sub_agents/constants.py\n---\nThis file defines the constants used by the `repo_navigator` agent. The `repo_navigator_model` is set to \"gemini-2.5-pro\". A previously used model, \"gemini-3-pro-preview\", is commented out.\n\n\n```python\n# repo_navigator_model = \"gemini-3-pro-preview\"\nrepo_navigator_model = \"gemini-2.5-pro\"\n```"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          },
+          "creation_timestamp": 1764804129.789764
+        }
+      ],
+      "session_input": {
+        "app_name": "repo_navigator",
+        "user_id": "user"
+      },
+      "creation_timestamp": 1764804293.3403533
+    }
+  ],
+  "creation_timestamp": 1764804281.57444
+}
