@@ -1,14 +1,13 @@
 from google.adk.agents import LlmAgent
 from .sub_agents.architecture_agent import architecture_summarizer_agent
 from .sub_agents.tools.github_tools import extract_owner_and_repo
-
+from .sub_agents.constants import repo_navigator_model
 from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner
 from google.adk.apps.app import App, EventsCompactionConfig
-from google.adk.plugins.logging_plugin import (
-    LoggingPlugin,
-) 
+from google.adk.plugins.logging_plugin import LoggingPlugin 
 import logging
+
 logging.basicConfig(level=logging.INFO)
 
 INSTRUCTION_ROOT = """ you are the routing agent for GitHub analysis. Your job is to extract OWNER/REPO from URLs using tool and delegate all questions to code_architecture_agent
@@ -22,7 +21,7 @@ WORKFLOW:
 Step 1: User asks question with GitHub URL or provides github URL - call extract_owner_and_repo(github URL)
 Step 2: Analyze result of extract_owner_and_repo:
    - If valid True
-        a.  transfer to "code_architecture_agent" and pass original_user_question, owner, repo, github_url. **DO NOT OUTPUT ANYTHING YOURSELF. IMMEDIATELY TRANSFER TO THE SUB-AGENT. No transfer message**
+        a.  transfer to "code_architecture_agent" and question:<original_user_question> pass owner:<owner>  repo:<repo> github_url:<github_url>. **DO NOT OUTPUT ANYTHING YOURSELF. IMMEDIATELY TRANSFER TO THE SUB-AGENT. No transfer message**
    - If valid False
         a. respond: "I need full github url, url ex: https://github.com/owner/repo"
 Step 3: If no URL in user message 
@@ -36,7 +35,7 @@ AGENT_NAME_ROOT = "repo_analysis_master"
 
 root_agent = LlmAgent(
     name=AGENT_NAME_ROOT,
-    model="gemini-2.5-pro",
+    model=repo_navigator_model,
     instruction=INSTRUCTION_ROOT,
     description=DESCRIPTION_ROOT,
     tools=[extract_owner_and_repo],

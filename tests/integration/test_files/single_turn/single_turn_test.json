@@ -89,29 +89,30 @@
           "intermediate_data": {
             "tool_uses": [
               {
+                "id": null,
                 "name": "extract_owner_and_repo",
                 "args": {
                   "github_url": "https://github.com/VandanaJn/chatbot-backend"
                 }
               },
               {
+                "id": null,
                 "name": "transfer_to_agent",
                 "args": {
-                  "agent_name": "code_architecture_agent"
+                  "agent_name": "code_architecture_agent",
+                  "github_url": "https://github.com/VandanaJn/chatbot-backend",
+                  "question": "what is https://github.com/VandanaJn/chatbot-backend about",
+                  "repo": "chatbot-backend",
+                  "owner": "VandanaJn"
                 }
               },
               {
+                "id": null,
                 "name": "get_repo_structure",
                 "args": {
                   "repo_name": "chatbot-backend",
                   "owner": "VandanaJn",
                   "max_depth": 2
-                }
-              },
-              {
-                "name": "code_summarizer",
-                "args": {
-                  "request": "what is https://github.com/VandanaJn/chatbot-backend about for owner:VandanaJn repo:chatbot-backend githuburl:https://github.com/VandanaJn/chatbot-backend/blob/main/app.py"
                 }
               }
             ],

@@ -2,7 +2,7 @@ from google.adk.agents import LlmAgent
 from google.adk.tools import AgentTool
 from .tools.github_tools import get_repo_structure
 from .file_summarizer_agent import file_architecture_summarizer_agent
-
+from .constants import repo_navigator_model
 
 INSTRUCTION_ARCHITECTURE = """
 You are a deterministic repository analysis expert for GitHub code structure and flow.
@@ -71,7 +71,7 @@ DESCRIPTION_ARCHITECTURE = "A deterministic specialist for GitHub repository ana
 
 architecture_summarizer_agent = LlmAgent(
     name="code_architecture_agent",
-    model="gemini-2.5-pro",
+    model=repo_navigator_model,
     instruction=INSTRUCTION_ARCHITECTURE,
     description=DESCRIPTION_ARCHITECTURE,
     tools=[get_repo_structure, AgentTool(file_architecture_summarizer_agent)],
