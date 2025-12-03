@@ -12,7 +12,7 @@ from google.adk.evaluation.agent_evaluator import AgentEvaluator
 import pytest
 
 @pytest.mark.asyncio
-async def test_with_simple_trajectory():
+async def test_with_single_turn():
     """Test the agent's basic ability via a session file."""
     
     await AgentEvaluator.evaluate(
