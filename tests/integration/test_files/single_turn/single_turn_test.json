@@ -39,7 +39,9 @@
                 "args": {
                   "agent_name": "code_architecture_agent",
                   "github_url": "https://github.com/VandanaJn/chatbot-backend",
-                  "original_user_question": "what is https://github.com/VandanaJn/chatbot-backend about"
+                  "question": "what is https://github.com/VandanaJn/chatbot-backend about",
+                  "repo": "chatbot-backend",
+                  "owner": "VandanaJn"
                 }
               },
               {
