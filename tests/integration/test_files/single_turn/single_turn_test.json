@@ -3,7 +3,6 @@
   "name": "Converted Evaluation Set V2",
   "creation_timestamp": 1678886400.0,
   "eval_cases": [
-
     {
       "eval_id": "case_2",
       "conversation": [
@@ -28,18 +27,23 @@
           "intermediate_data": {
             "tool_uses": [
               {
+                "id": null,
                 "name": "extract_owner_and_repo",
                 "args": {
                   "github_url": "https://github.com/VandanaJn/chatbot-backend"
                 }
               },
               {
+                "id": null,
                 "name": "transfer_to_agent",
                 "args": {
-                  "agent_name": "code_architecture_agent"
+                  "agent_name": "code_architecture_agent",
+                  "github_url": "https://github.com/VandanaJn/chatbot-backend",
+                  "original_user_question": "what is https://github.com/VandanaJn/chatbot-backend about"
                 }
               },
               {
+                "id": null,
                 "name": "get_repo_structure",
                 "args": {
                   "repo_name": "chatbot-backend",
@@ -54,6 +58,5 @@
         }
       ]
     }
-   
   ]
 }
