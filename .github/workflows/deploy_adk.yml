@@ -5,6 +5,7 @@ on:
     workflows: ["Python CI"]
     types: [completed]
     branches:
+      - work 
       - main 
 
 
