@@ -45,13 +45,11 @@ jobs:
         pip install google-adk
         pip install -r requirements.txt # Assuming you have a requirements.txt for your agent
       #TODO: IN FUTURE USE VERTEX SECRET MANAGER TO MANAGE SECRETS
-    - name: Create .env file
-      uses: SpicyPizza/create-envfile@v2.0
-      with:
-        # Use envkey_ prefix to map to env variables
-        envkey_GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }} 
-        directory: agents/repo_navigator # Specify the target directory directly
-        file_name: .env
+    - name: Generate .env file with secrets (Shell Script Alternative)
+      run: |
+        # Navigate to the correct directory and create the file
+        mkdir -p agents/repo_navigator
+        echo "GITHUB_TOKEN=${{ secrets.GITHUBTOKEN }}" > agents/repo_navigator/.env
 
     - name: Deploy ADK Agent to Vertex AI
       run: |
