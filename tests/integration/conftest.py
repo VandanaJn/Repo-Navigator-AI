@@ -2,7 +2,7 @@ import pytest
 
 # This conftest provides a deterministic fake GitHub client so integration
 # tests that depend on repository contents become repeatable. It only fakes
-# the minimal surface used by `agents/repo_navigator/sub_agents/tools/githubtools.py`.
+# the minimal surface used by `agents/repo_navigator/sub_agents/tools/github_tools.py`.
 
 class FakeItem:
     def __init__(self, type_, name, path, size=0):
@@ -25,7 +25,7 @@ class FakeRepo:
         self.full_name = full_name
 
     def get_contents(self, path, ref=None):
-        # Normalize path
+        del ref  # interface compatibility with real PyGithub; fake ignores branch
         p = (path or "").strip("/")
         owner_repo = self.full_name
 
@@ -49,6 +49,30 @@ class FakeRepo:
                     "whisper==20230314\n"
                 ).encode("utf-8")
                 return FakeContent("requirements.txt", "requirements.txt", content)
+
+        if owner_repo.endswith("Repo-Navigator-AI"):
+            if p == "" or p == ".":
+                return [FakeItem("dir", "agents", "agents")]
+            if p == "agents":
+                return [FakeItem("dir", "repo_navigator", "agents/repo_navigator")]
+            if p == "agents/repo_navigator":
+                return [
+                    FakeItem("file", "agent.py", "agents/repo_navigator/agent.py", 200),
+                    FakeItem("dir", "sub_agents", "agents/repo_navigator/sub_agents"),
+                ]
+            if p == "agents/repo_navigator/sub_agents":
+                return [
+                    FakeItem("file", "constants.py", "agents/repo_navigator/sub_agents/constants.py", 80),
+                ]
+            if p == "agents/repo_navigator/agent.py":
+                content = (
+                    "from .sub_agents.constants import repo_navigator_model\n"
+                    "root_agent = LlmAgent(model=repo_navigator_model)\n"
+                ).encode("utf-8")
+                return FakeContent("agent.py", "agents/repo_navigator/agent.py", content)
+            if p == "agents/repo_navigator/sub_agents/constants.py":
+                content = b'repo_navigator_model = "gemini-2.5-pro"\n'
+                return FakeContent("constants.py", "agents/repo_navigator/sub_agents/constants.py", content)
 
         if owner_repo.endswith("chatbot-backend"):
             if p == "" or p == ".":

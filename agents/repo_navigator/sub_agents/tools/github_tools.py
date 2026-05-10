@@ -3,9 +3,8 @@ import os
 import time
 import re
 from urllib.parse import urlparse
-from github import Github
-from dotenv import load_dotenv
 from github import Github, GithubException, RateLimitExceededException
+from dotenv import load_dotenv
 
 from .utils import logger, error_response, tool_safety
 
@@ -97,7 +96,7 @@ def safe_get_contents(repo, path, ref, max_retries=3):
                 # Final retry failed → return structured error
                 return error_response(f"Rate limited while fetching path: {path}")
 
-            print(f"⚠️ GitHub rate-limited {path}. Retrying in {delay}s...")
+            logger.warning("GitHub rate-limited %s. Retrying in %ds...", path, delay)
             time.sleep(delay)
             delay = min(delay * 2, 8)  # exponential backoff
             continue

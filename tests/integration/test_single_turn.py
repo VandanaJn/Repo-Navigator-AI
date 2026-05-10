@@ -1,15 +1,10 @@
-import os
 from dotenv import load_dotenv
-# Load environment variables from .env file
 load_dotenv()
 
 from google.adk.evaluation.agent_evaluator import AgentEvaluator
 
 import pytest
 
-from google.adk.evaluation.agent_evaluator import AgentEvaluator
-
-import pytest
 
 @pytest.mark.asyncio
 async def test_with_single_turn():

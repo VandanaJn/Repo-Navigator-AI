@@ -20,7 +20,7 @@ else
     PYTHON := $(VENV_PYTHON)
 endif
 
-.PHONY: install run web test ingest clean
+.PHONY: install run web test test-unit test-integration clean
 
 # ------------------------
 # Install dependencies
@@ -66,11 +66,23 @@ else
 endif
 
 # ------------------------
-# Run tests with coverage
+# Run unit tests with coverage (no network/LLM, no secrets needed)
 # ------------------------
-test:
-	@echo "Running tests with coverage..."
-	"$(PYTHON)" -m pytest tests --maxfail=1 --disable-warnings -q --cov=. --cov-report=term-missing --cov-fail-under=80
+test-unit:
+	@echo "Running unit tests with coverage..."
+	"$(PYTHON)" -m pytest tests/unit --maxfail=1 --disable-warnings -q --cov=agents --cov-report=term-missing --cov-fail-under=80
+
+# ------------------------
+# Run integration tests (live LLM calls; needs GOOGLE_API_KEY)
+# ------------------------
+test-integration:
+	@echo "Running integration tests..."
+	"$(PYTHON)" -m pytest tests/integration --maxfail=1 --disable-warnings -q
+
+# ------------------------
+# Run all tests (local convenience)
+# ------------------------
+test: test-unit test-integration
 
 # ------------------------
 # Remove virtual environment

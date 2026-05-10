@@ -6,21 +6,21 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-  GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  test:
+  unit:
     runs-on: ubuntu-latest
     env:
       CI: true
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
 
@@ -30,5 +30,33 @@ jobs:
       - name: Run Makefile install
         run: make install
 
-      - name: Run Makefile tests
-        run: make test
+      - name: Run unit tests
+        run: make test-unit
+
+  integration:
+    # Only run on pushes to trusted branches — never on PRs, so
+    # GOOGLE_API_KEY is never exposed to PR-author-controlled code.
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    needs: unit
+    env:
+      CI: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install make
+        run: sudo apt-get install -y make
+
+      - name: Run Makefile install
+        run: make install
+
+      - name: Run integration tests
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: make test-integration
