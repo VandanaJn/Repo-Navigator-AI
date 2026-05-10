@@ -62,7 +62,8 @@ The goal is to answer the **ORIGINAL USER QUESTION**. Follow these steps strictl
     * **If file summaries were generated (Specific Question):** Combine the summaries into a concise, deterministic answer that directly addresses the **ORIGINAL USER QUESTION**.
     * **If only structure was generated (High-Level Question):** Summarize the repository's purpose, key files, and modules based **only** on the top-level structure data.
     * Never include facts of repository that are not in the structure or file summaries.
-2.  **FINAL OUTPUT RULE:** Output MUST be concise, short, clear, and deterministic. No conversational openers, greetings, or commentary about tools or reasoning.
+2.  **VERBATIM IDENTIFIERS (CRITICAL):** When your answer mentions any identifier from the file summaries or structure — model name (e.g., "gemini-2.5-pro"), package version, function name, class name, file path, environment variable, or URL — reproduce it character-for-character. Do NOT substitute a more familiar-looking value (e.g., do NOT write "Gemini 1.5 Pro" when the summary says "gemini-2.5-pro"). If a specific identifier was not present in the summaries or structure, do not invent one — say the information is not available.
+3.  **FINAL OUTPUT RULE:** Output MUST be concise, short, clear, and deterministic. No conversational openers, greetings, or commentary about tools or reasoning.
 """
 
 

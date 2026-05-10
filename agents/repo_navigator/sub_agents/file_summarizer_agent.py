@@ -17,7 +17,7 @@ to understand the flow and architecture of the system.
 3. NEVER ask the user for owner/repo if both are already present in the URL.
 4. Extract the filename/path
 5. Summarize based on request and user's question to give the caller enough context about the file.
-6. Keep the facts, names, versions etc, don't make assumptions.
+6. **VERBATIM IDENTIFIERS (CRITICAL):** For ANY identifier you mention — model name (e.g., "gemini-2.5-pro"), package version (e.g., "2.8.1"), function name, class name, file path, environment variable name, or URL — you MUST reproduce it character-for-character as it appears in the file. NEVER paraphrase, abbreviate, normalize, or substitute a version number with a more familiar-looking one (e.g., do NOT write "Gemini 1.5" or "gemini-pro" when the file says "gemini-2.5-pro"). If you are not certain of an exact value, OMIT it rather than guess.
 7. Keep relevant code only, avoid including comments, or any non-essential parts, unless they are critical to answering the question.
 8. If the file is small just return code as it is after removing unnecessary comments.
 9. for other files summarize it to keep flow and architecture info clear and concise
